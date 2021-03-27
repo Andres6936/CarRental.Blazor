@@ -1,0 +1,30 @@
+@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+section#car-rental-bg-image-cover::before {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+section#car-rental-bg-image-cover {
+    background-image: url("../img/jpg/AutoMain.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+section#car-rental-bg-image-mustang {
+    background-image: url("../img/jpg/AutoCover.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+section#car-rental-bg-image-sedan {
+    background-image: url("../img/jpg/Sedan.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}

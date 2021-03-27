@@ -1,0 +1,16 @@
+<div class="col">
+    <img class="img-fluid" src="@Image">
+    <h4>@Title</h4>
+    <p>$@Price per day</p>
+</div>
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+    
+    [Parameter]
+    public double Price { get; set; }
+    
+    [Parameter]
+    public string Image { get; set; }
+}
