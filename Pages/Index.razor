@@ -1,4 +1,7 @@
 ﻿@page "/"
+@using Rental.Data
+@using Rental.Data.Context
+@inject RentalContext RentalContext
 
 <Navigation></Navigation>
 
@@ -38,12 +41,17 @@
 
 <section class="row row-cols-1 row-cols-sm-2 row-cols-xxl-3 text-center mx-sm-5 p-5 p-xxl-5">
     
-    <CardVehicle Title="Volkswagen Polo Golf VII" Image="img/jpg/Volkswagen.jpg" Price="20.00"></CardVehicle>
-    <CardVehicle Title="Tesla Model S" Image="img/jpg/Tesla.jpg" Price="20.00"></CardVehicle>
-    <CardVehicle Title="BMW 640d" Image="img/jpg/BMW.jpg" Price="20.00"></CardVehicle>
-    <CardVehicle Title="Audi TT" Image="img/jpg/Audi.jpg" Price="20.00"></CardVehicle>
-    <CardVehicle Title="Honda CR-V IV" Image="img/jpg/Honda.jpg" Price="20.00"></CardVehicle>
-    <CardVehicle Title="BMW 2 Series Coupé" Image="img/jpg/Series.jpg" Price="20.00"></CardVehicle>
+    @if (_cars.Count == 0)
+    {
+        <p>Noping</p>
+    }
+    else
+    {
+        foreach (var car in _cars)
+        {
+            <CardVehicle Title=@car.Name Image=@car.Image Price=@car.Price />
+        }
+    }
 
 </section>
 
@@ -236,4 +244,13 @@
 
 <Footer></Footer>
 
-<SurveyPrompt Title="How is Blazor working for you?"/>
+@code {
+
+    private List<Car> _cars;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _cars = await RentalContext.GetAllOwnCars();
+    }
+
+}
