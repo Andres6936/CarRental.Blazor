@@ -1,25 +1,35 @@
 @page "/All"
+@using Rental.Data
+@using Rental.Data.Context
+@inject RentalContext RentalContext
 
 
 <Navigation></Navigation>
 
 <section class="row g-5 px-3 py-5 row-cols-1 row-cols-md-2 px-md-5 mx-md-5 row-cols-xxl-3 px-xxl-5 mx-xxl-5">
 
-    <CardVehicleRent Image="/img/pexels/jae-park/Clinton.jpg" Copyright="Jae Park"></CardVehicleRent>
-    <CardVehicleRent Image="/img/pexels/jae-park/Ferrari.jpg" Copyright="Jae Park"></CardVehicleRent>
-    <CardVehicleRent Image="/img/pexels/john-mark-smith/Old.jpg" Copyright="John Mark Smith"></CardVehicleRent>
-    <CardVehicleRent Image="/img/pexels/kelson-downes/Toyota.jpg" Copyright="Kelson Downes"></CardVehicleRent>
-    <CardVehicleRent Image="/img/pexels/kelson-downes/ToyotaDown.jpg" Copyright="Kelson Downes"></CardVehicleRent>
-    <CardVehicleRent Image="/img/pexels/kelson-downes/ToyotaUp.jpg" Copyright="Kelson Downes"></CardVehicleRent>
-    <CardVehicleRent Image="/img/pexels/mike/Audi.jpg" Copyright="Mike"></CardVehicleRent>
-    <CardVehicleRent Image="/img/pexels/mike/AudiDown.jpg" Copyright="Mike"></CardVehicleRent>
-    <CardVehicleRent Image="/img/jpg/Audi.jpg" Copyright="Jae Park"></CardVehicleRent>
-    <CardVehicleRent Image="/img/jpg/BMW.jpg" Copyright="Jae Park"></CardVehicleRent>
-    <CardVehicleRent Image="/img/jpg/Honda.jpg" Copyright="John Mark Smith"></CardVehicleRent>
-    <CardVehicleRent Image="/img/pexels/svh/CitroenUp.jpg" Copyright="Kelson Downes"></CardVehicleRent>
-    <CardVehicleRent Image="/img/pexels/svh/Citroen.jpg" Copyright="Kelson Downes"></CardVehicleRent>
-    <CardVehicleRent Image="/img/jpg/Tesla.jpg" Copyright="Kelson Downes"></CardVehicleRent>
-    <CardVehicleRent Image="/img/jpg/Volkswagen.jpg" Copyright="Mike"></CardVehicleRent>
+    @if (Cars.Count == 0)
+    {
+        <p>Noping</p>
+    }
+    else
+    {
+        <CardVehicleRent Image="/img/pexels/jae-park/Clinton.jpg" Copyright="Jae Park"></CardVehicleRent>
+        <CardVehicleRent Image="/img/pexels/jae-park/Ferrari.jpg" Copyright="Jae Park"></CardVehicleRent>
+        <CardVehicleRent Image="/img/pexels/john-mark-smith/Old.jpg" Copyright="John Mark Smith"></CardVehicleRent>
+        <CardVehicleRent Image="/img/pexels/kelson-downes/Toyota.jpg" Copyright="Kelson Downes"></CardVehicleRent>
+        <CardVehicleRent Image="/img/pexels/kelson-downes/ToyotaDown.jpg" Copyright="Kelson Downes"></CardVehicleRent>
+        <CardVehicleRent Image="/img/pexels/kelson-downes/ToyotaUp.jpg" Copyright="Kelson Downes"></CardVehicleRent>
+        <CardVehicleRent Image="/img/pexels/mike/Audi.jpg" Copyright="Mike"></CardVehicleRent>
+        <CardVehicleRent Image="/img/pexels/mike/AudiDown.jpg" Copyright="Mike"></CardVehicleRent>
+        <CardVehicleRent Image="/img/jpg/Audi.jpg" Copyright="Jae Park"></CardVehicleRent>
+        <CardVehicleRent Image="/img/jpg/BMW.jpg" Copyright="Jae Park"></CardVehicleRent>
+        <CardVehicleRent Image="/img/jpg/Honda.jpg" Copyright="John Mark Smith"></CardVehicleRent>
+        <CardVehicleRent Image="/img/pexels/svh/CitroenUp.jpg" Copyright="Kelson Downes"></CardVehicleRent>
+        <CardVehicleRent Image="/img/pexels/svh/Citroen.jpg" Copyright="Kelson Downes"></CardVehicleRent>
+        <CardVehicleRent Image="/img/jpg/Tesla.jpg" Copyright="Kelson Downes"></CardVehicleRent>
+        <CardVehicleRent Image="/img/jpg/Volkswagen.jpg" Copyright="Mike"></CardVehicleRent>
+    }
 
 </section>
 
@@ -44,3 +54,14 @@
 </nav>
 
 <Footer></Footer>
+
+@code {
+
+    private List<Car> Cars;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Cars = await RentalContext.GetAllCars();
+    }
+
+}
