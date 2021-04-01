@@ -8,13 +8,13 @@
 
 <section class="row g-5 px-3 py-5 row-cols-1 row-cols-md-2 px-md-5 mx-md-5 row-cols-xxl-3 px-xxl-5 mx-xxl-5">
 
-    @if (Cars.Count == 0)
+    @if (_cars.Count == 0)
     {
         <p>Noping</p>
     }
     else
     {
-        foreach (var car in Cars)
+        foreach (var car in _cars)
         {
             <CardVehicleRent Image=@car.Image Copyright=@car.Copyright />            
         }
@@ -46,11 +46,11 @@
 
 @code {
 
-    private List<Car> Cars;
+    private List<Car> _cars;
 
     protected override async Task OnInitializedAsync()
     {
-        Cars = await RentalContext.GetAllCars();
+        _cars = await RentalContext.GetAllCars();
     }
 
 }
