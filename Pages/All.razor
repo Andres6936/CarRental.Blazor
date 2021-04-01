@@ -14,21 +14,10 @@
     }
     else
     {
-        <CardVehicleRent Image="/img/pexels/jae-park/Clinton.jpg" Copyright="Jae Park"></CardVehicleRent>
-        <CardVehicleRent Image="/img/pexels/jae-park/Ferrari.jpg" Copyright="Jae Park"></CardVehicleRent>
-        <CardVehicleRent Image="/img/pexels/john-mark-smith/Old.jpg" Copyright="John Mark Smith"></CardVehicleRent>
-        <CardVehicleRent Image="/img/pexels/kelson-downes/Toyota.jpg" Copyright="Kelson Downes"></CardVehicleRent>
-        <CardVehicleRent Image="/img/pexels/kelson-downes/ToyotaDown.jpg" Copyright="Kelson Downes"></CardVehicleRent>
-        <CardVehicleRent Image="/img/pexels/kelson-downes/ToyotaUp.jpg" Copyright="Kelson Downes"></CardVehicleRent>
-        <CardVehicleRent Image="/img/pexels/mike/Audi.jpg" Copyright="Mike"></CardVehicleRent>
-        <CardVehicleRent Image="/img/pexels/mike/AudiDown.jpg" Copyright="Mike"></CardVehicleRent>
-        <CardVehicleRent Image="/img/jpg/Audi.jpg" Copyright="Jae Park"></CardVehicleRent>
-        <CardVehicleRent Image="/img/jpg/BMW.jpg" Copyright="Jae Park"></CardVehicleRent>
-        <CardVehicleRent Image="/img/jpg/Honda.jpg" Copyright="John Mark Smith"></CardVehicleRent>
-        <CardVehicleRent Image="/img/pexels/svh/CitroenUp.jpg" Copyright="Kelson Downes"></CardVehicleRent>
-        <CardVehicleRent Image="/img/pexels/svh/Citroen.jpg" Copyright="Kelson Downes"></CardVehicleRent>
-        <CardVehicleRent Image="/img/jpg/Tesla.jpg" Copyright="Kelson Downes"></CardVehicleRent>
-        <CardVehicleRent Image="/img/jpg/Volkswagen.jpg" Copyright="Mike"></CardVehicleRent>
+        foreach (var car in Cars)
+        {
+            <CardVehicleRent Image=@car.Image Copyright=@car.Copyright />            
+        }
     }
 
 </section>

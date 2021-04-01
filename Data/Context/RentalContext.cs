@@ -1,9 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
 
 namespace Rental.Data.Context
@@ -27,7 +24,9 @@ namespace Rental.Data.Context
             {
                 cars.Add(new Car
                 {
-                    License = row["CAR_LICENSE"].ToString()
+                    License = row["CAR_LICENSE"].ToString(),
+                    Image = row["CAR_IMAGE"].ToString(),
+                    Copyright = row["CAR_COPYRIGHT"].ToString()
                 });
             }
             
