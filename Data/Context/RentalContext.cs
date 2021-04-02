@@ -13,24 +13,43 @@ namespace Rental.Data.Context
             return new("Database=Temporal;Data Source=localhost;User Id=root;Password=HDgtDVi5");
         }
 
+        private Car GetInformationFromRow(DataRow row)
+        {
+            return new()
+            {
+                Name = row["CAR_NAME"].ToString(),
+                Image = row["CAR_IMAGE"].ToString(),
+                License = row["CAR_LICENSE"].ToString(),
+                Copyright = row["CAR_COPYRIGHT"].ToString(),
+                Own = int.Parse(row["CAR_OWN"].ToString()),
+                Price = int.Parse(row["CAR_PRICE_PER_DAY"].ToString())
+            };
+        }
+
         private List<Car> GetInformationCarsFromQuery(DataTable table)
         {
             var cars = new List<Car>();
             
             foreach (DataRow row in table.Rows)
             {
-                cars.Add(new Car
-                {
-                    Name = row["CAR_NAME"].ToString(),
-                    Image = row["CAR_IMAGE"].ToString(),
-                    License = row["CAR_LICENSE"].ToString(),
-                    Copyright = row["CAR_COPYRIGHT"].ToString(),
-                    Own = int.Parse(row["CAR_OWN"].ToString()),
-                    Price = int.Parse(row["CAR_PRICE_PER_DAY"].ToString()),
-                });
+                cars.Add(GetInformationFromRow(row));
             }
 
             return cars;
+        }
+
+        public async Task<Car> GetCarByLicense(string license)
+        {
+            var adapter = new MySqlDataAdapter(
+                "Select * from Car where CAR_LICENSE = " + license, GetConnection());
+            var table = new DataTable();
+            
+            adapter.Fill(table);
+
+            // Get the first and unique result
+            DataRow row = table.Rows[0];
+
+            return await Task.FromResult(GetInformationFromRow(row));
         }
 
         public async Task<List<Car>> GetAllCars()
