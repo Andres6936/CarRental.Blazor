@@ -45,8 +45,13 @@ namespace Rental.Data.Context
 
         public async Task<Car> GetCarByLicense(string license)
         {
-            var adapter = new MySqlDataAdapter(
-                "Select * from Car where CAR_LICENSE = " + license, GetConnection());
+            var cmd = new MySqlCommand("Select * from Car where CAR_LICENSE = @License",
+                GetConnection());
+            
+            // Fill the parameters
+            cmd.Parameters.AddWithValue("@License", license);
+            
+            var adapter = new MySqlDataAdapter(cmd);
             var table = new DataTable();
             
             adapter.Fill(table);
