@@ -49,7 +49,7 @@
     {
         foreach (var car in _cars)
         {
-            <CardVehicle Title=@car.Name Image=@car.Image Price=@car.Price />
+            <CardVehicle Title=@car.Name Image=@car.Image Price=@car.Price License="@car.License" />
         }
     }
 
