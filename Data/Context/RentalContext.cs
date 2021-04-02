@@ -21,8 +21,13 @@ namespace Rental.Data.Context
                 Image = row["CAR_IMAGE"].ToString(),
                 License = row["CAR_LICENSE"].ToString(),
                 Copyright = row["CAR_COPYRIGHT"].ToString(),
+                Transmission = row["CAR_TRANSMISSION"].ToString(),
+                AirConditioning = row["CAR_AIR"].ToString(),
                 Own = int.Parse(row["CAR_OWN"].ToString()),
-                Price = int.Parse(row["CAR_PRICE_PER_DAY"].ToString())
+                Bags = int.Parse(row["CAR_BAGS"].ToString()),
+                Doors = int.Parse(row["CAR_DOORS"].ToString()),
+                Price = int.Parse(row["CAR_PRICE_PER_DAY"].ToString()),
+                People = int.Parse(row["CAR_PEOPLE"].ToString()),
             };
         }
 
