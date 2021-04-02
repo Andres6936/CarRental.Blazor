@@ -1,3 +1,5 @@
+@inject NavigationManager NavigationManager
+
 <div class="col">
         <img src="@Image" class="img-fluid img-thumbnail" alt="Vehicle">
         <p class="text-muted small mt-3 pt-2 text-end px-md-5 px-xxl-0 me-3 border-top">
@@ -5,14 +7,23 @@
         </p>
         <div class="row row-cols-2 gx-5 px-5">
             <button class="col btn btn-primary">Rent</button>
-            <button class="col btn btn-outline-primary">More Info.</button>
+            <button class="col btn btn-outline-primary" @onclick="SeeInformationCar">More Info.</button>
         </div>
     </div>
 
 @code {
+    
+    [Parameter]
+    public string License { get; set; }
+    
     [Parameter]
     public string Image { get; set; }
     
     [Parameter]
     public string Copyright { get; set; }
+
+    private void SeeInformationCar()
+    {
+        NavigationManager.NavigateTo("/Vehicle/" + License);
+    }
 }
