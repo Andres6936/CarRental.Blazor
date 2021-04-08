@@ -1,16 +1,16 @@
-VCA122,/img/jpg/Series.jpg,Joan Company,1143995473,BMW 2 Series Coupé,89
-VCA123,/img/pexels/jae-park/Clinton.jpg,Jae Park,70829037,Gas-Propelled Aerotrain,121
-VCA124,/img/pexels/jae-park/Ferrari.jpg,Jae Park,70829037,Chemical Marveltrain,110
-VCA125,/img/pexels/john-mark-smith/Old.jpg,John Mark Smith,1144585874,Implosion-Powered Eternitruck,108
-VCA126,/img/pexels/kelson-downes/Toyota.jpg,Kelson Downes,40829037,Petroleum Powercopter,102
-VCA127,/img/pexels/kelson-downes/ToyotaDown.jpg,Kelson Downes,40829037,The Peril,98
-VCA128,/img/pexels/kelson-downes/ToyotaUp.jpg,Kelson Downes,40829037,The Anomaly,70
-VCA129,/img/pexels/mike/Audi.jpg,Mike,555478159,The Demon,88
-VCA130,/img/pexels/mike/AudiDown.jpg,Mike,555478159,Xoshofmobile,77
-VCA131,/img/jpg/Audi.jpg,Jae Park,1143995473,Honda CR-V IV,87
-VCA132,/img/jpg/BMW.jpg,Jae Park,1143995473,BMW 640d,98
-VCA133,/img/jpg/Honda.jpg,John Mark Smith,1143995473,Honda CR-V IV,98
-VCA134,/img/pexels/svh/CitroenUp.jpg,Kelson Downes,40829037,Fleeguhcraft,66
-VCA135,/img/pexels/svh/Citroen.jpg,Kelson Downes,40829037,Freobiplane,99
-VCA136,/img/jpg/Tesla.jpg,Kelson Downes,1143995473,Tesla Model S,120
-VCA137,/img/jpg/Volkswagen.jpg,Mike,1143995473,Volkswagen Polo Golf VII,154
+VCA122,/img/jpg/Series.jpg,Joan Company,1143995473,BMW 2 Series Coupé,89,4,4,5,Automatic,Air-conditioning
+VCA123,/img/pexels/jae-park/Clinton.jpg,Jae Park,70829037,Gas-Propelled Aerotrain,121,2,2,2,Automatic,Without Air-conditioning
+VCA124,/img/pexels/jae-park/Ferrari.jpg,Jae Park,70829037,Chemical Marveltrain,110,4,5,8,Manual,Air-conditioning
+VCA125,/img/pexels/john-mark-smith/Old.jpg,John Mark Smith,1144585874,Implosion-Powered Eternitruck,108,2,4,4,Automatic,Without Air-conditioning
+VCA126,/img/pexels/kelson-downes/Toyota.jpg,Kelson Downes,40829037,Petroleum Powercopter,102,4,2,2,Manual,Air-conditioning
+VCA127,/img/pexels/kelson-downes/ToyotaDown.jpg,Kelson Downes,40829037,The Peril,98,2,2,2,Automatic,Without Air-conditioning
+VCA128,/img/pexels/kelson-downes/ToyotaUp.jpg,Kelson Downes,40829037,The Anomaly,70,4,4,5,Manual,Air-conditioning
+VCA129,/img/pexels/mike/Audi.jpg,Mike,555478159,The Demon,88,3,5,8,Automatic,Without Air-conditioning
+VCA130,/img/pexels/mike/AudiDown.jpg,Mike,555478159,Xoshofmobile,77,4,2,3,Manual,Air-conditioning
+VCA131,/img/jpg/Audi.jpg,Jae Park,1143995473,Honda CR-V IV,87,3,4,5,Automatic,Without Air-conditioning
+VCA132,/img/jpg/BMW.jpg,Jae Park,1143995473,BMW 640d,98,2,2,2,Manual,Air-conditioning
+VCA133,/img/jpg/Honda.jpg,John Mark Smith,1143995473,Honda CR-V IV,98,1,5,8,Automatic,Air-conditioning
+VCA134,/img/pexels/svh/CitroenUp.jpg,Kelson Downes,40829037,Fleeguhcraft,66,2,4,4,Manual,Without Air-conditioning
+VCA135,/img/pexels/svh/Citroen.jpg,Kelson Downes,40829037,Freobiplane,99,4,2,2,Automatic,Air-conditioning
+VCA136,/img/jpg/Tesla.jpg,Kelson Downes,1143995473,Tesla Model S,120,1,4,5,Manual,Without Air-conditioning
+VCA137,/img/jpg/Volkswagen.jpg,Mike,1143995473,Volkswagen Polo Golf VII,154,1,2,2,Automatic,Air-conditioning
