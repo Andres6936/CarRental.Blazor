@@ -11,6 +11,7 @@ create table Car
     CAR_PEOPLE        smallint                                              null,
     CAR_TRANSMISSION  enum ('Manual', 'Automatic')                          null,
     CAR_AIR           enum ('Air-conditioning', 'Without Air-conditioning') null,
+    CAR_IS_OWN        enum ('YES', 'NO')                                    not null,
     constraint Car_CAR_PLACA_uindex
         unique (CAR_LICENSE),
     constraint CAR_OWN_SERIAL
