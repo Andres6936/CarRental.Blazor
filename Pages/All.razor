@@ -6,20 +6,101 @@
 
 <Navigation></Navigation>
 
-<section class="row g-5 px-3 py-5 row-cols-1 row-cols-md-2 px-md-5 mx-md-5 row-cols-xxl-3 px-xxl-5 mx-xxl-5">
+<section class="row">
+    <div class="px-5 pb-5 col-md-6 col-xxl-3 d-none d-md-block">
+        <div class="bg-light border py-5 px-4 sticky-top" style="transform: translateY(55px)">
+            <select class="form-select mb-4" aria-label="Default select example">
+                <option selected>All Marks</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
 
-    @if (_cars.Count == 0)
-    {
-        <p>Noping</p>
-    }
-    else
-    {
-        foreach (var car in _cars)
-        {
-            <CardVehicleRent Image=@car.Image Copyright=@car.Copyright License="@car.License" />            
-        }
-    }
+            <input class="form-control mb-4" placeholder="Select Mark First"/>
 
+            <div class="row mb-3">
+                <div class="col-6">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Min Price</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="col-6">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Max Price</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-6">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>From: 1990</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="col-6">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>To: 2022</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-6">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Min Km.</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="col-6">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Max Km.</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+
+            <select class="form-select mb-4" aria-label="Default select example">
+                <option selected>Vehicle Type</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+
+            <button class="col-8 offset-2 btn btn-primary">Search</button>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-xxl-9">
+        <div class="row g-5 px-3 py-5 row-cols-1 row-cols-md-1 ps-md-0 pe-md-2 ms-md-0 me-md-2 row-cols-xxl-3 ps-xxl-2 pe-xxl-5 ms-xxl-2 me-xxl-5">
+            @if (_cars.Count == 0)
+                {
+                    <p>Noping</p>
+                }
+                else
+                {
+                    foreach (var car in _cars)
+                    {
+                        <CardVehicleRent Image=@car.Image Copyright=@car.Copyright License="@car.License"/>
+                    }
+                }
+        </div>
+    </div>
 </section>
 
 <nav aria-label="Page navigation example">
