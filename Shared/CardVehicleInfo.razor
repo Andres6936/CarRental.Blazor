@@ -1,3 +1,5 @@
+@inject NavigationManager NavigationManager
+
 <section class="col-12 p-0 mx-0 my-3 col-xxl-6 mx-xxl-0 px-xxl-5">
         <img src="@Image" class="img-fluid px-md-5 px-xxl-0" alt="Vehicle">
         <p class="text-muted small mt-3 text-end px-md-5 px-xxl-0">Photo by @Copyright from Pexels</p>
@@ -94,6 +96,9 @@
     public string Image { get; set; }
     
     [Parameter]
+    public string License { get; set; }
+    
+    [Parameter]
     public string Copyright { get; set; }
     
     [Parameter]
@@ -101,5 +106,10 @@
     
     [Parameter]
     public string AirConditioning { get; set; }
+    
+    private void RentalCar()
+    {
+        NavigationManager.NavigateTo("/Rent/" + License);
+    }
     
 }

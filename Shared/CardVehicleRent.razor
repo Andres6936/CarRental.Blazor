@@ -6,7 +6,7 @@
         Photo by @Copyright from Pexels
     </p>
     <div class="btn-group col-12 px-2 px-xxl-5">
-        <button class="col-6 btn btn-primary">Rent</button>
+        <button class="col-6 btn btn-primary" @onclick="RentalCar">Rent</button>
         <button class="col-6 btn btn-outline-primary" @onclick="SeeInformationCar">More Info.</button>
     </div>
 </div>
@@ -27,4 +27,8 @@
         NavigationManager.NavigateTo("/Vehicle/" + License);
     }
 
+    private void RentalCar()
+    {
+        NavigationManager.NavigateTo("/Rent/" + License);
+    }
 }

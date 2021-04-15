@@ -1,12 +1,15 @@
-@page "/Rent"
+@page "/Rent/{License}"
+@using Rental.Data
+@using Rental.Data.Context
+@inject RentalContext RentalContext
 
 <Navigation></Navigation>
 
 <section class="row row-cols-1">
     <div class="col px-4">
         <section class="col-12 p-0 mx-0 my-3 col-xxl-6 mx-xxl-0 px-xxl-5">
-            <img src="/img/pexels/kelson-downes/Toyota.jpg" class="img-fluid px-md-5 px-xxl-0" alt="Vehicle">
-            <p class="text-muted small mt-3 text-end px-md-5 px-xxl-0">Photo by Kelson Downes from Pexels</p>
+            <img src="@_car.Image" class="img-fluid px-md-5 px-xxl-0" alt="Vehicle">
+            <p class="text-muted small mt-3 text-end px-md-5 px-xxl-0">Photo by @_car.Copyright from Pexels</p>
         </section>
 
         <section class="col-12 p-0 mx-0 my-3 col-xxl-6 mx-xxl-0 px-xxl-5">
@@ -17,10 +20,10 @@
                     <p class="mb-1 small">Sun, Apr 18 - 12:00 PM</p>
 
                     <h6 class="fw-bold border-top mt-3 pt-3">Charges</h6>
-                    <p class="mb-1 small">Economy <span class="float-end">$113.94</span></p>
+                    <p class="mb-1 small">Economy <span class="float-end">$@_car.Price</span></p>
                     <p class="mb-1 small">Taxes and fees <span class="float-end">--</span></p>
 
-                    <h6 class="fw-bold border-top mt-3 pt-3 mb-0">Total <span class="float-end">$113.94</span></h6>
+                    <h6 class="fw-bold border-top mt-3 pt-3 mb-0">Total <span class="float-end">$@_car.Price</span></h6>
                 </div>
             </div>
         </section>
@@ -91,3 +94,17 @@
 </section>
 
 <Footer></Footer>
+
+@code {
+    
+    [Parameter]
+    public string License { get; set; }
+    
+    private Car _car;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _car = await RentalContext.GetCarByLicense(License);
+    }
+    
+}

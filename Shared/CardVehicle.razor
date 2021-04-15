@@ -6,7 +6,7 @@
     <p>$@Price per day</p>
     <div class="row gx-5 px-xxl-5 mx-xxl-5">
         <div class="btn-group">
-            <button class="col-6 btn btn-primary">Rent</button>
+            <button class="col-6 btn btn-primary" @onclick="RentalCar">Rent</button>
             <button class="col-6 btn btn-outline-primary" @onclick="SeeInformationCar">More Info.</button>
         </div>
     </div>
@@ -28,5 +28,10 @@
     private void SeeInformationCar()
     {
         NavigationManager.NavigateTo("/Vehicle/" + License);
+    }
+
+    private void RentalCar()
+    {
+        NavigationManager.NavigateTo("/Rent/" + License);
     }
 }
