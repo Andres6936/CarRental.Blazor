@@ -75,7 +75,7 @@ namespace Rental.Data.Context
         public async Task<List<Car>> GetAllOwnCars()
         {
             var adapter = new MySqlDataAdapter(
-                "Select * from Car where CAR_OWN = 1143995473", GetConnection());
+                "Select * from Car where CAR_IS_OWN = 'YES'", GetConnection());
             var table = new DataTable();
             
             adapter.Fill(table);
