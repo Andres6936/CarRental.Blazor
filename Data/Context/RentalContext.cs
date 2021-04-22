@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using MySql.Data.Types;
 
 namespace Rental.Data.Context
 {
@@ -13,7 +14,7 @@ namespace Rental.Data.Context
             return new("Database=Temporal;Data Source=localhost;User Id=root;Password=HDgtDVi5");
         }
 
-        private Car GetInformationFromRow(DataRow row)
+        private Car GetCarFromRow(DataRow row)
         {
             return new()
             {
@@ -31,13 +32,25 @@ namespace Rental.Data.Context
             };
         }
 
+        private Loan GetLoanFromRow(DataRow row)
+        {
+            return new()
+            {
+                Serial = int.Parse(row["LOAN_SERIAL"].ToString()),
+                User = row["LOAN_USER"].ToString(),
+                DateStart = (MySqlDateTime) row["LOAN_DATE_START"],
+                DateEnd = (MySqlDateTime) row["LOAN_DATE_END"],
+                CarLicense = row["LOAN_CAR_LICENSE"].ToString()
+            };
+        }
+
         private List<Car> GetInformationCarsFromQuery(DataTable table)
         {
             var cars = new List<Car>();
             
             foreach (DataRow row in table.Rows)
             {
-                cars.Add(GetInformationFromRow(row));
+                cars.Add(GetCarFromRow(row));
             }
 
             return cars;
@@ -59,7 +72,7 @@ namespace Rental.Data.Context
             // Get the first and unique result
             DataRow row = table.Rows[0];
 
-            return await Task.FromResult(GetInformationFromRow(row));
+            return await Task.FromResult(GetCarFromRow(row));
         }
 
         public async Task<List<Car>> GetAllCars()
