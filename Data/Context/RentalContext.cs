@@ -44,6 +44,18 @@ namespace Rental.Data.Context
             };
         }
 
+        private List<Loan> GetInformationLoanFromQuery(DataTable table)
+        {
+            var loans = new List<Loan>();
+
+            foreach (DataRow row in table.Rows)
+            {
+                loans.Add(GetLoanFromRow(row));
+            }
+
+            return loans;
+        }
+
         private List<Car> GetInformationCarsFromQuery(DataTable table)
         {
             var cars = new List<Car>();
@@ -75,6 +87,16 @@ namespace Rental.Data.Context
             return await Task.FromResult(GetCarFromRow(row));
         }
 
+        public async Task<List<Loan>> GetAllLoans()
+        {
+            var adapter = new MySqlDataAdapter("Select * from Loan", GetConnection());
+            var table = new DataTable();
+            
+            adapter.Fill(table);
+
+            return await Task.FromResult(GetInformationLoanFromQuery(table));
+        }
+        
         public async Task<List<Car>> GetAllCars()
         {
             var adapter = new MySqlDataAdapter("Select * from Car", GetConnection());
