@@ -68,6 +68,22 @@ namespace Rental.Data.Context
             return cars;
         }
 
+        public async Task<List<Loan>> GetLoansByLicense(string license)
+        {
+            var cmd = new MySqlCommand("Select * from Loan Join Cliente C on Loan.LOAN_USER = C.CLI_USER Join Car C2 on C2.CAR_LICENSE = Loan.LOAN_CAR_LICENSE and C2.CAR_LICENSE = @License",
+                GetConnection());
+            
+            // Fill the parameters
+            cmd.Parameters.AddWithValue("@License", license);
+            
+            var adapter = new MySqlDataAdapter(cmd);
+            var table = new DataTable();
+            
+            adapter.Fill(table);
+
+            return await Task.FromResult(GetInformationLoanFromQuery(table));
+        }
+        
         public async Task<Car> GetCarByLicense(string license)
         {
             var cmd = new MySqlCommand("Select * from Car where CAR_LICENSE = @License",

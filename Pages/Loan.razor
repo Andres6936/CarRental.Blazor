@@ -1,4 +1,4 @@
-@page "/Loan"
+@page "/Loan/{License}"
 @using Rental.Data.Context
 @inject RentalContext RentalContext
 
@@ -11,10 +11,13 @@
 
 @code {
 
+    [Parameter]
+    public string License { get; set; }
+    
     private List<Rental.Data.Loan> _loans;
     
     protected override async Task OnInitializedAsync()
     {
-        _loans = await RentalContext.GetAllLoans();
+        _loans = await RentalContext.GetLoansByLicense(License);
     }
 }
