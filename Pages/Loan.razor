@@ -1,0 +1,20 @@
+@page "/Loan"
+@using Rental.Data.Context
+@inject RentalContext RentalContext
+
+<h3>Loan</h3>
+
+@foreach (var loan in _loans)
+{
+    <p>@loan.DateStart</p>
+}
+
+@code {
+
+    private List<Rental.Data.Loan> _loans;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        _loans = await RentalContext.GetAllLoans();
+    }
+}
