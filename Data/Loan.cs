@@ -1,4 +1,4 @@
-using MySql.Data.Types;
+using System;
 
 namespace Rental.Data
 {
@@ -10,8 +10,8 @@ namespace Rental.Data
 
         public string CarLicense { get; set; }
         
-        public MySqlDateTime DateEnd { get; set; }
+        public DateTime DateEnd { get; set; }
         
-        public MySqlDateTime DateStart { get; set; }
+        public DateTime DateStart { get; set; }
     }
 }

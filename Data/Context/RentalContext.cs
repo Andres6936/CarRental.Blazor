@@ -38,8 +38,8 @@ namespace Rental.Data.Context
             {
                 Serial = int.Parse(row["LOAN_SERIAL"].ToString()),
                 User = row["LOAN_USER"].ToString(),
-                DateStart = (MySqlDateTime) row["LOAN_DATE_START"],
-                DateEnd = (MySqlDateTime) row["LOAN_DATE_END"],
+                DateStart = (DateTime) row["LOAN_DATE_START"],
+                DateEnd = (DateTime) row["LOAN_DATE_END"],
                 CarLicense = row["LOAN_CAR_LICENSE"].ToString()
             };
         }
