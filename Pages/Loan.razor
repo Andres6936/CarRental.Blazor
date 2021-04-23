@@ -2,12 +2,31 @@
 @using Rental.Data.Context
 @inject RentalContext RentalContext
 
-<h3>Loan</h3>
+<Navigation></Navigation>
 
-@foreach (var loan in _loans)
-{
-    <p>@loan.DateStart</p>
-}
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">User</th>
+    <th scope="col">Date Start</th>
+    <th scope="col">Date End</th>
+  </tr>
+  </thead>
+  <tbody>
+  @foreach (var loan in _loans)
+  {
+      <tr>
+            <th scope="row">@loan.Serial</th>
+            <td>@loan.User</td>
+            <td>@loan.DateStart</td>
+            <td>@loan.DateEnd</td>
+      </tr>
+  }
+  </tbody>
+</table>
+
+<Footer></Footer>
 
 @code {
 
