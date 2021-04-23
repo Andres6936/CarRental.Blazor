@@ -9,9 +9,19 @@ namespace Rental.Data.Context
 {
     public class RentalContext
     {
+
+        private static MySqlConnection _connection;
+        
         private MySqlConnection GetConnection()
         {
-            return new("Database=Temporal;Data Source=localhost;User Id=root;Password=HDgtDVi5");
+            if (_connection == null)
+            {
+                _connection =
+                    new MySqlConnection("Database=Temporal;Data Source=localhost;User Id=root;Password=HDgtDVi5");
+                return _connection;
+            }
+
+            return _connection;
         }
 
         private Car GetCarFromRow(DataRow row)
