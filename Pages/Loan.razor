@@ -11,7 +11,7 @@
         <th scope="col">User</th>
         <th scope="col">Date Start</th>
         <th scope="col">Date End</th>
-        <th scope="col">Right Date</th>
+        <th scope="col">Status</th>
     </tr>
     </thead>
     <tbody>
@@ -22,7 +22,15 @@
             <td>@loan.User</td>
             <td>@loan.DateStart.ToString("yyyy-MM-dd")</td>
             <td>@loan.DateEnd.ToString("yyyy-MM-dd")</td>
-            <td>@VerifyAndUpdateDates(@loan.Serial, @loan.DateStart, @loan.DateEnd)</td>
+            
+            @if (IsActive(@loan.DateEnd))
+            {
+                <td><span class="badge bg-success">Active</span></td>
+            }
+            else
+            {
+                <td><span class="badge bg-secondary">Inactive</span></td>
+            }
         </tr>
     }
     </tbody>
@@ -42,17 +50,24 @@
         _loans = await RentalContext.GetLoansByLicense(License);
     }
 
-    private string VerifyAndUpdateDates(int serial, DateTime start, DateTime end)
+    private void VerifyAndUpdateDates(int serial, DateTime start, DateTime end)
     {
         // Greater than zero - This date start is later than date end (wrong format).
         if (start.CompareTo(end) > 0)
         {
             // Interchange the dates for set the right format.
             RentalContext.UpdateLoanDates(serial, end.ToString("yyyy-MM-dd"), start.ToString("yyyy-MM-dd"));
-            return "Wrong";
+        }
+    }
+
+    private bool IsActive(DateTime end)
+    {
+        if (end.CompareTo(DateTime.Today) >= 0)
+        {
+            return true;
         }
 
-        return "Right";
+        return false;
     }
 
 }
