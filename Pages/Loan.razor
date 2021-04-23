@@ -10,7 +10,8 @@
     <th scope="col">#</th>
     <th scope="col">User</th>
     <th scope="col">Date Start</th>
-    <th scope="col">Date End</th>
+      <th scope="col">Date End</th>
+      <th scope="col">Right Date</th>
   </tr>
   </thead>
   <tbody>
@@ -20,7 +21,8 @@
             <th scope="row">@loan.Serial</th>
             <td>@loan.User</td>
             <td>@loan.DateStart</td>
-            <td>@loan.DateEnd</td>
+          <td>@loan.DateEnd</td>
+          <td>@VerifyDates(@loan.DateStart, @loan.DateEnd)</td>
       </tr>
   }
   </tbody>
@@ -38,5 +40,16 @@
     protected override async Task OnInitializedAsync()
     {
         _loans = await RentalContext.GetLoansByLicense(License);
+    }
+
+    private string VerifyDates(DateTime start, DateTime end)
+    {
+        // Less than zero - This date start is earlier than date end (wrong format).
+        if (start.CompareTo(end) < 0)
+        {
+            return "Wrong";
+        }
+
+        return "Right";
     }
 }
