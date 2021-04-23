@@ -63,6 +63,11 @@
             RentalContext.UpdateLoanDates(serial, end.ToString("yyyy-MM-dd"), start.ToString("yyyy-MM-dd"));
         }
     }
+
+    private bool IsCanceled()
+    {
+        return false;
+    }
     
     private bool IsFuture(DateTime start)
     {
