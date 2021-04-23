@@ -151,15 +151,22 @@ namespace Rental.Data.Context
          */
         public int UpdateLoanDates(int serial, string start, string end)
         {
+            var connection = GetConnection(); 
             var cmd = new MySqlCommand("Update Loan Set Loan.LOAN_DATE_START = @DateStart, Loan.LOAN_DATE_END = @DateEnd Where Loan.LOAN_SERIAL = @Serial",
-                GetConnection());
+                connection);
             
             // Fill the parameters
             cmd.Parameters.AddWithValue("@Serial", serial);
             cmd.Parameters.AddWithValue("@DateStart", start);
             cmd.Parameters.AddWithValue("@DateEnd", end);
-
-            return cmd.ExecuteNonQuery();
+            
+            connection.Open();
+            
+            int result = cmd.ExecuteNonQuery();
+            
+            connection.Close();
+            
+            return result;
         }
     }
 }
