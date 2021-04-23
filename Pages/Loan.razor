@@ -5,27 +5,27 @@
 <Navigation></Navigation>
 
 <table class="table">
-  <thead>
-  <tr>
-    <th scope="col">#</th>
-    <th scope="col">User</th>
-    <th scope="col">Date Start</th>
-      <th scope="col">Date End</th>
-      <th scope="col">Right Date</th>
-  </tr>
-  </thead>
-  <tbody>
-  @foreach (var loan in _loans)
-  {
-      <tr>
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">User</th>
+        <th scope="col">Date Start</th>
+        <th scope="col">Date End</th>
+        <th scope="col">Right Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var loan in _loans)
+    {
+        <tr>
             <th scope="row">@loan.Serial</th>
             <td>@loan.User</td>
             <td>@loan.DateStart.ToString("yyyy-MM-dd")</td>
-          <td>@loan.DateEnd.ToString("yyyy-MM-dd")</td>
-          @* <td>@VerifyAndUpdateDates(@loan.Serial, @loan.DateStart, @loan.DateEnd)</td> *@
-      </tr>
-  }
-  </tbody>
+            <td>@loan.DateEnd.ToString("yyyy-MM-dd")</td>
+            <td>@VerifyAndUpdateDates(@loan.Serial, @loan.DateStart, @loan.DateEnd)</td>
+        </tr>
+    }
+    </tbody>
 </table>
 
 <Footer></Footer>
@@ -34,9 +34,9 @@
 
     [Parameter]
     public string License { get; set; }
-    
+
     private List<Rental.Data.Loan> _loans;
-    
+
     protected override async Task OnInitializedAsync()
     {
         _loans = await RentalContext.GetLoansByLicense(License);
@@ -44,14 +44,15 @@
 
     private string VerifyAndUpdateDates(int serial, DateTime start, DateTime end)
     {
-        // Less than zero - This date start is earlier than date end (wrong format).
+    // Less than zero - This date start is earlier than date end (wrong format).
         if (start.CompareTo(end) < 0)
         {
-            // Interchange the dates for set the right format.
+    // Interchange the dates for set the right format.
             RentalContext.UpdateLoanDates(serial, end.ToString("yyyy-MM-dd"), start.ToString("yyyy-MM-dd"));
             return "Wrong";
         }
 
         return "Right";
     }
+
 }
