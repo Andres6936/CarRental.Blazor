@@ -23,7 +23,11 @@
             <td>@loan.DateStart.ToString("yyyy-MM-dd")</td>
             <td>@loan.DateEnd.ToString("yyyy-MM-dd")</td>
             
-            @if (IsFuture(@loan.DateStart))
+            @if (IsCanceled(@loan.HasBeenCanceled))
+            {
+                <td><span class="badge bg-danger">Canceled</span></td>
+            }
+            else if (IsFuture(@loan.DateStart))
             {
                 <td><span class="badge bg-primary">Future</span></td>
             }
@@ -64,8 +68,13 @@
         }
     }
 
-    private bool IsCanceled()
+    private bool IsCanceled(string isCanceled)
     {
+        if (isCanceled.Equals("TRUE"))
+        {
+            return true;
+        }
+        
         return false;
     }
     
