@@ -133,5 +133,23 @@ namespace Rental.Data.Context
             
             return await Task.FromResult(GetInformationCarsFromQuery(table));
         }
+
+        /**
+         * The aim of this method is fixed the format of dates, the current dates for the loan record
+         * had a wrong format, in several records the end date is earlier to start date.
+         * <returns>Return 1 if the operation is successful, any other value if the operation fail.</returns>
+         */
+        public int UpdateLoanDates(int serial, string start, string end)
+        {
+            var cmd = new MySqlCommand("Update Loan Set Loan.LOAN_DATE_START = @DateStart, Loan.LOAN_DATE_END = @DateEnd Where Loan.LOAN_SERIAL = @Serial",
+                GetConnection());
+            
+            // Fill the parameters
+            cmd.Parameters.AddWithValue("@Serial", serial);
+            cmd.Parameters.AddWithValue("@DateStart", start);
+            cmd.Parameters.AddWithValue("@DateEnd", end);
+
+            return cmd.ExecuteNonQuery();
+        }
     }
 }
