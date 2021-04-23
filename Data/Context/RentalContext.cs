@@ -50,7 +50,8 @@ namespace Rental.Data.Context
                 User = row["LOAN_USER"].ToString(),
                 DateStart = (DateTime) row["LOAN_DATE_START"],
                 DateEnd = (DateTime) row["LOAN_DATE_END"],
-                CarLicense = row["LOAN_CAR_LICENSE"].ToString()
+                CarLicense = row["LOAN_CAR_LICENSE"].ToString(),
+                HasBeenCanceled = row["LOAN_HB_CANCELED"].ToString()
             };
         }
 

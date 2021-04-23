@@ -10,6 +10,8 @@ namespace Rental.Data
 
         public string CarLicense { get; set; }
         
+        public string HasBeenCanceled { get; set; }
+        
         public DateTime DateEnd { get; set; }
         
         public DateTime DateStart { get; set; }
