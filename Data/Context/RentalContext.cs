@@ -70,7 +70,7 @@ namespace Rental.Data.Context
 
         public async Task<List<Loan>> GetLoansByLicense(string license)
         {
-            var cmd = new MySqlCommand("Select * from Loan Join Cliente C on Loan.LOAN_USER = C.CLI_USER Join Car C2 on C2.CAR_LICENSE = Loan.LOAN_CAR_LICENSE and C2.CAR_LICENSE = @License",
+            var cmd = new MySqlCommand("Select * from Loan Where Loan.LOAN_CAR_LICENSE = @License",
                 GetConnection());
             
             // Fill the parameters
