@@ -44,8 +44,8 @@
 
     private string VerifyAndUpdateDates(int serial, DateTime start, DateTime end)
     {
-        // Less than zero - This date start is earlier than date end (wrong format).
-        if (start.CompareTo(end) < 0)
+        // Greater than zero - This date start is later than date end (wrong format).
+        if (start.CompareTo(end) > 0)
         {
             // Interchange the dates for set the right format.
             RentalContext.UpdateLoanDates(serial, end.ToString("yyyy-MM-dd"), start.ToString("yyyy-MM-dd"));
