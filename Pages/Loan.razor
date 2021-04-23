@@ -23,7 +23,11 @@
             <td>@loan.DateStart.ToString("yyyy-MM-dd")</td>
             <td>@loan.DateEnd.ToString("yyyy-MM-dd")</td>
             
-            @if (IsActive(@loan.DateEnd))
+            @if (IsFuture(@loan.DateStart))
+            {
+                <td><span class="badge bg-primary">Future</span></td>
+            }
+            else if (IsActive(@loan.DateEnd))
             {
                 <td><span class="badge bg-success">Active</span></td>
             }
@@ -58,6 +62,16 @@
             // Interchange the dates for set the right format.
             RentalContext.UpdateLoanDates(serial, end.ToString("yyyy-MM-dd"), start.ToString("yyyy-MM-dd"));
         }
+    }
+    
+    private bool IsFuture(DateTime start)
+    {
+        if (start.CompareTo(DateTime.Today) > 0)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     private bool IsActive(DateTime end)
