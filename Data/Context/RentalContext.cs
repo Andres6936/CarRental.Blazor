@@ -169,5 +169,27 @@ namespace Rental.Data.Context
             
             return result;
         }
+
+        public bool VerifyUserCredentials(string username, string password)
+        {
+            var connection = GetConnection(); 
+            var cmd = new MySqlCommand("Select exists(select * from Cliente where CLI_USER=@User and CLI_PASSWORD=@Password)",
+                connection);
+            
+            // Fill the parameters
+            cmd.Parameters.AddWithValue("@User", username);
+            cmd.Parameters.AddWithValue("@Password", password);
+
+            connection.Open();
+            
+            long number = (long) cmd.ExecuteScalar();
+            bool result = number > 0;
+            
+            Console.WriteLine("(long) cmd.ExecuteScalar() = " + number);
+            
+            connection.Close();
+            
+            return result;
+        }
     }
 }
