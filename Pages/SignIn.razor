@@ -1,66 +1,88 @@
 @page "/SignIn"
+@using System.Web;
 
-<nav class="navbar navbar-expand-md navbar-dark fw-bold"
-     style="background-color: #000; color: #FFF; font-family: Roboto, sans-serif;">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">
-            <img src="/img/png/Logo.png" alt="Logo" width="140" height="36">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/About">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/All">Rent</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Service">Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contacts</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<section class="row row-cols-1 bg-light py-5">
-    <div class="col col-sm-6 offset-sm-3 col-lg offset-lg-0 p-5">
-        <div class="col-lg-5 offset-lg-3">
-            <h4 class="fw-bold text-center pb-2">Login a your account</h4>
-            <p class="text-center pb-5">Don't have an account? <a class="text-primary text-decoration-none ms-2">Sign Up
-                Free</a>
-            </p>
-            <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="floating-input" placeholder="name@example.com">
-                <label for="floating-input">Email address</label>
+<AuthorizeView>
+    <Authorized>
+        <b>Hello, @context.User.Identity.Name!</b>
+        <a class="ml-md-auto btn btn-primary"
+           href="/SignOutControl?returnUrl=/">Logout</a>
+    </Authorized>
+    <NotAuthorized>
+        <nav class="navbar navbar-expand-md navbar-dark fw-bold"
+             style="background-color: #000; color: #FFF; font-family: Roboto, sans-serif;">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">
+                    <img src="/img/png/Logo.png" alt="Logo" width="140" height="36">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/About">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/All">Rent</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Service">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contacts</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="form-floating">
-                <input type="password" class="form-control" id="floating-password" placeholder="Password">
-                <label for="floating-password">Password</label>
-            </div>
-            <div class="form-check small mt-3">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">
-                    Remember me
-                </label>
-                <span><a class="text-primary text-decoration-none float-end">Forgot Password?</a></span>
-            </div>
-            <button class="col-12 btn btn-primary py-3 mt-4 fw-bold">Login with Email</button>
-        </div>
-    </div>
+        </nav>
 
-    <div class="col d-none d-lg-block col-lg">
-        <img src="/img/png/In.png" class="img-fluid"/>
-    </div>
-</section>
+        <section class="row row-cols-1 bg-light py-5">
+            <div class="col col-sm-6 offset-sm-3 col-lg offset-lg-0 p-5">
+                <div class="col-lg-5 offset-lg-3">
+                    <h4 class="fw-bold text-center pb-2">Login a your account</h4>
+                    <p class="text-center pb-5">Don't have an account? <a class="text-primary text-decoration-none ms-2">Sign Up
+                        Free</a>
+                    </p>
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="floating-input" placeholder="Username" @bind="@_username">
+                        <label for="floating-input">Username</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="floating-password" placeholder="Password" @bind="@_password">
+                        <label for="floating-password">Password</label>
+                    </div>
+                    <div class="form-check small mt-3">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Remember me
+                        </label>
+                        <span><a class="text-primary text-decoration-none float-end">Forgot Password?</a></span>
+                    </div>
+                    <a class="col-12 btn btn-primary py-3 mt-4 fw-bold"
+                            href="/SignInControl?username=@encode(@_username)&password=@encode(@_password)">Login
+                    </a>
+                </div>
+            </div>
 
-<Footer></Footer>
+            <div class="col d-none d-lg-block col-lg">
+                <img src="/img/png/In.png" class="img-fluid"/>
+            </div>
+        </section>
+
+        <Footer></Footer>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    private string _username;
+    private string _password;
+    
+    private string encode(string param)
+    {
+        return HttpUtility.UrlEncode(param);
+    }
+}
