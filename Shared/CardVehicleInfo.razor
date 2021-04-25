@@ -107,9 +107,22 @@
     [Parameter]
     public string AirConditioning { get; set; }
     
-    private void RentalCar()
+    [CascadingParameter]
+    private Task<AuthenticationState> AuthenticationStateTask { get; set; }
+    
+    private async Task RentalCar()
     {
-        NavigationManager.NavigateTo("/Rent/" + License);
+        var authState = await AuthenticationStateTask;
+        var user = authState.User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            NavigationManager.NavigateTo("/Rent/" + License);
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/SignIn");
+        }
     }
     
 }
