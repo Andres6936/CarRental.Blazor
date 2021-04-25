@@ -95,6 +95,22 @@ namespace Rental.Data.Context
             return await Task.FromResult(GetInformationLoanFromQuery(table));
         }
         
+        public async Task<List<Loan>> GetLoansByUser(string user)
+        {
+            var cmd = new MySqlCommand("Select * from Loan Where Loan.LOAN_USER = @User",
+                GetConnection());
+            
+            // Fill the parameters
+            cmd.Parameters.AddWithValue("@User", user);
+            
+            var adapter = new MySqlDataAdapter(cmd);
+            var table = new DataTable();
+            
+            adapter.Fill(table);
+
+            return await Task.FromResult(GetInformationLoanFromQuery(table));
+        }
+        
         public async Task<Car> GetCarByLicense(string license)
         {
             var cmd = new MySqlCommand("Select * from Car where CAR_LICENSE = @License",

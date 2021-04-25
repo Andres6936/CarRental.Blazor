@@ -1,0 +1,88 @@
+@page "/User/{User}"
+@using Rental.Data.Context
+@inject RentalContext RentalContext
+
+<Navigation></Navigation>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Date Start</th>
+        <th scope="col">Date End</th>
+        <th scope="col">Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var loan in _loans)
+    {
+        <tr>
+            <th scope="row">@loan.Serial</th>
+            <td>@loan.DateStart.ToString("yyyy-MM-dd")</td>
+            <td>@loan.DateEnd.ToString("yyyy-MM-dd")</td>
+            
+            @if (IsCanceled(@loan.HasBeenCanceled))
+            {
+                <td><span class="badge bg-danger">Canceled</span></td>
+            }
+            else if (IsFuture(@loan.DateStart))
+            {
+                <td><span class="badge bg-primary">Future</span></td>
+            }
+            else if (IsActive(@loan.DateEnd))
+            {
+                <td><span class="badge bg-success">Active</span></td>
+            }
+            else
+            {
+                <td><span class="badge bg-secondary">Inactive</span></td>
+            }
+        </tr>
+    }
+    </tbody>
+</table>
+
+<Footer></Footer>
+
+@code
+{
+    [Parameter]
+    public string User { get; set; }
+    
+    private List<Rental.Data.Loan> _loans;
+    
+    private bool IsCanceled(string isCanceled)
+    {
+        if (isCanceled.Equals("TRUE"))
+        {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    private bool IsFuture(DateTime start)
+    {
+        if (start.CompareTo(DateTime.Today) > 0)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool IsActive(DateTime end)
+    {
+        if (end.CompareTo(DateTime.Today) >= 0)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        _loans = await RentalContext.GetLoansByUser(User);
+    }
+}
