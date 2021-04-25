@@ -25,13 +25,26 @@
     [Parameter]
     public string License { get; set; }
     
+    [CascadingParameter]
+    private Task<AuthenticationState> AuthenticationStateTask { get; set; }
+    
     private void SeeInformationCar()
     {
         NavigationManager.NavigateTo("/Vehicle/" + License);
     }
 
-    private void RentalCar()
+    private async Task RentalCar()
     {
-        NavigationManager.NavigateTo("/Rent/" + License);
+        var authState = await AuthenticationStateTask;
+        var user = authState.User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            NavigationManager.NavigateTo("/Rent/" + License);
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/SignIn");
+        }
     }
 }
