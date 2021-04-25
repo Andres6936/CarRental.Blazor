@@ -1,6 +1,7 @@
-@page "/User/{User}"
+@page "/User/Loans"
 @using Rental.Data.Context
 @inject RentalContext RentalContext
+@inject NavigationManager NavigationManager
 
 <Navigation></Navigation>
 
@@ -49,6 +50,9 @@
     [Parameter]
     public string User { get; set; }
     
+    [CascadingParameter]
+    private Task<AuthenticationState> AuthenticationStateTask { get; set; }
+    
     private List<Rental.Data.Loan> _loans;
     
     private bool IsCanceled(string isCanceled)
@@ -83,6 +87,16 @@
 
     protected override async Task OnInitializedAsync()
     {
-        _loans = await RentalContext.GetLoansByUser(User);
+        var authState = await AuthenticationStateTask;
+        var user = authState.User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            _loans = await RentalContext.GetLoansByUser(user.Identity.Name);            
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/SignIn");
+        }
     }
 }
