@@ -11,6 +11,7 @@
         <th scope="col">#</th>
         <th scope="col">Date Start</th>
         <th scope="col">Date End</th>
+        <th scope="col">Total Days</th>
         <th scope="col">License</th>
         <th scope="col">Status</th>
     </tr>
@@ -22,7 +23,8 @@
             <th scope="row">@loan.Serial</th>
             <td>@loan.DateStart.ToString("yyyy-MM-dd")</td>
             <td>@loan.DateEnd.ToString("yyyy-MM-dd")</td>
-            <th>@loan.CarLicense</th>
+            <td>@GetTotalDaysUsed(@loan.DateStart, @loan.DateEnd)</td>
+            <td>@loan.CarLicense</td>
             
             @if (IsCanceled(@loan.HasBeenCanceled))
             {
@@ -56,6 +58,14 @@
     private Task<AuthenticationState> AuthenticationStateTask { get; set; }
     
     private List<Rental.Data.Loan> _loans;
+
+    /// Calculate difference between two dates (number of days).
+    /// <returns>The days of difference between the dates</returns>
+    private int GetTotalDaysUsed(DateTime start, DateTime end)
+    {
+        // Reference: https://stackoverflow.com/a/1607352
+        return (end - start).Days;
+    }
     
     private bool IsCanceled(string isCanceled)
     {
