@@ -186,6 +186,25 @@ namespace Rental.Data.Context
             return result;
         }
 
+        public int UpdateLoanTotalDaysUsed(int serial, int totalDaysUsed)
+        {
+            var connection = GetConnection(); 
+            var cmd = new MySqlCommand("Update Loan Set Loan.LOAN_TOTAL_DAYS_USED = @TotalDaysUsed Where Loan.LOAN_SERIAL = @Serial",
+                connection);
+            
+            // Fill the parameters
+            cmd.Parameters.AddWithValue("@Serial", serial);
+            cmd.Parameters.AddWithValue("@TotalDaysUsed", totalDaysUsed);
+
+            connection.Open();
+            
+            int result = cmd.ExecuteNonQuery();
+            
+            connection.Close();
+            
+            return result;
+        }
+
         public bool VerifyUserCredentials(string username, string password)
         {
             var connection = GetConnection(); 
