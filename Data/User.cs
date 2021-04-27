@@ -1,8 +1,8 @@
 namespace Rental.Data
 {
-    public class Client
+    public class User
     {
-        public string User { get; set; }
+        public string Username { get; set; }
 
         public string Password { get; set; }
 
