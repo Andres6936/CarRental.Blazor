@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
-using MySql.Data.Types;
 
 namespace Rental.Data.Context
 {
