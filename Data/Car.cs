@@ -2,8 +2,6 @@ namespace Rental.Data
 {
     public class Car
     {
-        public int Own { get; set; }
-        
         public int Bags { get; set; }
         
         public int Doors { get; set; }
@@ -15,8 +13,12 @@ namespace Rental.Data
         public string Name { get; set; }
         
         public string Image { get; set; }
+
+        public string IsOwn { get; set; }
         
         public string License { get; set; }
+        
+        public string Username { get; set; }
 
         public string Copyright { get; set; }
         

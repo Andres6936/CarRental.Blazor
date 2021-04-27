@@ -30,11 +30,12 @@ namespace Rental.Data.Context
             {
                 Name = row["CAR_NAME"].ToString(),
                 Image = row["CAR_IMAGE"].ToString(),
+                IsOwn = row["CAR_IS_OWN"].ToString(),
                 License = row["CAR_LICENSE"].ToString(),
                 Copyright = row["CAR_COPYRIGHT"].ToString(),
+                Username = row["CAR_USER_USERNAME"].ToString(),
                 Transmission = row["CAR_TRANSMISSION"].ToString(),
                 AirConditioning = row["CAR_AIR"].ToString(),
-                Own = int.Parse(row["CAR_OWN"].ToString()),
                 Bags = int.Parse(row["CAR_BAGS"].ToString()),
                 Doors = int.Parse(row["CAR_DOORS"].ToString()),
                 Price = int.Parse(row["CAR_PRICE_PER_DAY"].ToString()),
