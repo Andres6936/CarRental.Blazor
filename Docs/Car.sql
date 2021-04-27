@@ -11,11 +11,11 @@ create table Car
     CAR_TRANSMISSION  enum ('Manual', 'Automatic')                          null,
     CAR_AIR           enum ('Air-conditioning', 'Without Air-conditioning') null,
     CAR_IS_OWN        enum ('YES', 'NO')                                    not null,
-    CAR_USER_USERNMAE varchar(15)                                           not null,
+    CAR_USER_USERNAME varchar(15)                                           not null,
     constraint Car_CAR_PLACA_uindex
         unique (CAR_LICENSE),
     constraint Car_User_CLI_USER_fk
-        foreign key (CAR_USER_USERNMAE) references User (CLI_USER)
+        foreign key (CAR_USER_USERNAME) references User (CLI_USER)
 );
 
 alter table Car
