@@ -208,7 +208,7 @@ namespace Rental.Data.Context
         public bool VerifyUserCredentials(string username, string password)
         {
             var connection = GetConnection(); 
-            var cmd = new MySqlCommand("Select exists(select * from Cliente where CLI_USER=@User and CLI_PASSWORD=@Password)",
+            var cmd = new MySqlCommand("Select exists(select * from User where CLI_USER=@User and CLI_PASSWORD=@Password)",
                 connection);
             
             // Fill the parameters

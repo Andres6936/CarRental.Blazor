@@ -12,7 +12,7 @@ create table Loan
     constraint Loan_CAR_LICENSE
         foreign key (LOAN_CAR_LICENSE) references Car (CAR_LICENSE),
     constraint Loan_CLI_USER
-        foreign key (LOAN_USER) references Cliente (CLI_USER)
+        foreign key (LOAN_USER) references User (CLI_USER)
 );
 
 alter table Loan

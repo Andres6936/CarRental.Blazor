@@ -1,4 +1,4 @@
-create table Cliente
+create table User
 (
     CLI_USER               varchar(15) not null,
     CLI_PASSWORD           varchar(80) not null,
@@ -13,6 +13,6 @@ create table Cliente
         unique (CLI_USER)
 );
 
-alter table Cliente
+alter table User
     add primary key (CLI_USER);
 
