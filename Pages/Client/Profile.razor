@@ -1,0 +1,36 @@
+@page "/Profile"
+@using Rental.Data
+@using Rental.Data.Context
+@inject RentalContext RentalContext
+
+<Navigation/>
+
+<AuthorizeView>
+    <Authorized>
+        <CardProfile User="@_user"></CardProfile>
+    </Authorized>
+    <NotAuthorized>
+        <MessageNotAuthorized/>
+    </NotAuthorized>
+</AuthorizeView>
+
+<Footer></Footer>
+
+@code 
+{
+    private User _user;
+    
+    [CascadingParameter]
+    private Task<AuthenticationState> AuthenticationStateTask { get; set; }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateTask;
+        var user = authState.User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            _user = await RentalContext.GetUserByUsername(user.Identity.Name);            
+        }
+    }
+}

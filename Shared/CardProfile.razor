@@ -1,0 +1,32 @@
+@using Rental.Data
+
+<section class="p-4 p-sm-5">
+    <div class="row row-cols-1 row-cols-sm-2 p-5 border rounded bg-white">
+        <div class="col-12 col-sm-4 text-center">
+            <img src="@User.Icon" height="124" class="pb-3" />
+            <p class="fw-bold mb-1">@User.FirstName @User.LastName</p>
+            <p class="small">@User.Role</p>
+        </div>
+        <div class="col-12 col-sm-8">
+            <h6 class="fw-bold border-bottom pb-1">Information</h6>
+            <div class="row row-cols-1 row-cols-sm-2 pt-3">
+                <div class="row">
+                    <h6 class="fw-bold">Email</h6>
+                    <p>@User.Email</p>
+                </div>
+                <div class="row">
+                    <h6 class="fw-bold">Phone</h6>
+                    <p class="text-nowrap">@User.Phone</p>
+                </div>
+            </div>
+            <h6 class="fw-bold border-bottom pb-1">Loans</h6>
+            <p class="pt-3">17 April 2021 - 22 April 2021</p>
+        </div>
+    </div>
+</section>
+
+@code 
+{
+    [Parameter]
+    public User User { get; set; }
+}
