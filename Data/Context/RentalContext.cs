@@ -28,7 +28,7 @@ namespace Rental.Data.Context
             return new()
             {
                 Username = row["CLI_USER"].ToString(),
-                Email = row["CLI_EMAL"].ToString(),
+                Email = row["CLI_EMAIL"].ToString(),
                 Icon = row["CLI_ICON"].ToString(),
                 FirstName = row["CLI_FIRST_NAME"].ToString(),
                 LastName = row["CLI_LAST_NAME"].ToString(),
