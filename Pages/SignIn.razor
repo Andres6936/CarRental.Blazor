@@ -1,12 +1,8 @@
 @page "/SignIn"
 @using System.Web;
+@inject NavigationManager NavigationManager
 
 <AuthorizeView>
-    <Authorized>
-        <b>Hello, @context.User.Identity.Name!</b>
-        <a class="ml-md-auto btn btn-primary"
-           href="/SignOutControl?returnUrl=/">Logout</a>
-    </Authorized>
     <NotAuthorized>
         <nav class="navbar navbar-expand-md navbar-dark fw-bold"
              style="background-color: #000; color: #FFF; font-family: Roboto, sans-serif;">
@@ -81,8 +77,22 @@
     private string _username;
     private string _password;
     
+    [CascadingParameter]
+    private Task<AuthenticationState> AuthenticationStateTask { get; set; }
+    
     private string encode(string param)
     {
         return HttpUtility.UrlEncode(param);
+    }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateTask;
+        var user = authState.User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            NavigationManager.NavigateTo("/Profile");            
+        }
     }
 }
