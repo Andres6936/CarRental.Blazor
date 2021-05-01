@@ -7,6 +7,8 @@ namespace Rental.Data
         public string Password { get; set; }
 
         public string Email { get; set; }
+        
+        public string Icon { get; set; }
 
         public string FirstName { get; set; }
 
