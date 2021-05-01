@@ -27,15 +27,15 @@ namespace Rental.Data.Context
         {
             return new()
             {
-                Username = row[""].ToString(),
-                Email = row[""].ToString(),
-                Icon = row[""].ToString(),
-                FirstName = row[""].ToString(),
-                LastName = row[""].ToString(),
-                CreditCardNumber = row[""].ToString(),
-                CreditCardCvv = row[""].ToString(),
-                Country = row[""].ToString(),
-                Phone = row[""].ToString(),
+                Username = row["CLI_USER"].ToString(),
+                Email = row["CLI_EMAL"].ToString(),
+                Icon = row["CLI_ICON"].ToString(),
+                FirstName = row["CLI_FIRST_NAME"].ToString(),
+                LastName = row["CLI_LAST_NAME"].ToString(),
+                CreditCardNumber = row["CLI_CREDIT_CARD_NUMBER"].ToString(),
+                CreditCardCvv = row["CLI_CREDIT_CARD_CVV"].ToString(),
+                Country = row["CLI_COUNTRY"].ToString(),
+                Phone = row["CLI_PHONE"].ToString(),
             };
         }
 
