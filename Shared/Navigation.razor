@@ -1,3 +1,5 @@
+@using Rental.Data
+
 <nav class="navbar navbar-expand-sm navbar-dark fw-bold"
      style="background-color: #000; color: #FFF; font-family: Roboto, sans-serif;">
     <div class="container-fluid">
@@ -27,12 +29,41 @@
                 </li>
             </ul>
         </div>
-        <span class="d-none d-md-block navbar-text me-4">
-            Sign Up
-        </span>
-        <span class="d-none d-md-block navbar-text me-3 border-primary border rounded-pill px-3 bg-primary fw-bold"
-              style="color: #FFF">
-            <a href="/SignIn" class="text-decoration-none">Sign In</a>
-        </span>
+        
+        @if (User == null)
+        {
+            <span class="d-none d-md-block navbar-text me-4">
+                Sign Up
+            </span>
+            <span class="d-none d-md-block navbar-text me-3 border-primary border rounded-pill px-3 bg-primary fw-bold"
+                  style="color: #FFF">
+                <a href="/SignIn" class="text-decoration-none">Sign In</a>
+            </span>            
+        }
+        else
+        {
+            <span class="d-none d-sm-block d-md-block navbar-text me-4">
+                @User.FirstName, @User.LastName
+            </span>
+            <span class="d-none d-sm-block d-md-block navbar-text me-4 dropstart">
+                <a id="rental-dropstart-user" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="@User.Icon" height="30" />
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="rental-dropstart-user">
+                    <li><a class="dropdown-item active" href="#">Perfil</a></li>
+                    <li><a class="dropdown-item" href="#">My Panel</a></li>
+                    <li><a class="dropdown-item" href="#">Configuration</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item bg-danger" href="#">Sign Out</a></li>
+                </ul>
+            </span>
+        }
     </div>
 </nav>
+
+@code
+{
+    [Parameter]
+    public User User { get; set; }
+
+}
