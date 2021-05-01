@@ -1,4 +1,6 @@
 @using Rental.Data
+@using Rental.Data.Context
+@inject RentalContext RentalContext
 
 <nav class="navbar navbar-expand-sm navbar-dark fw-bold"
      style="background-color: #000; color: #FFF; font-family: Roboto, sans-serif;">
@@ -30,7 +32,7 @@
             </ul>
         </div>
         
-        @if (User == null)
+        @if (_user == null)
         {
             <span class="d-none d-md-block navbar-text me-4">
                 Sign Up
@@ -43,11 +45,11 @@
         else
         {
             <span class="d-none d-sm-block d-md-block navbar-text me-4">
-                @User.FirstName, @User.LastName
+                @_user.FirstName, @_user.LastName
             </span>
             <span class="d-none d-sm-block d-md-block navbar-text me-4 dropstart">
                 <a id="rental-dropstart-user" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="@User.Icon" height="30" />
+                    <img src="@_user.Icon" height="30" />
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="rental-dropstart-user">
                     <li><a class="dropdown-item active" href="/Profile">Profile</a></li>
@@ -63,7 +65,19 @@
 
 @code
 {
-    [Parameter]
-    public User User { get; set; }
+    private User _user;
+    
+    [CascadingParameter]
+    private Task<AuthenticationState> AuthenticationStateTask { get; set; }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateTask;
+        var user = authState.User;
 
+        if (user.Identity.IsAuthenticated)
+        {
+            _user = await RentalContext.GetUserByUsername(user.Identity.Name);
+        }
+    }
 }

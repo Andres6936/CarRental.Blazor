@@ -3,7 +3,7 @@
 @using Rental.Data.Context
 @inject RentalContext RentalContext
 
-<Navigation User="@_user"></Navigation>
+<Navigation/>
 
 <section id="car-rental-bg-image-cover" class="bg-dark p-5">
     <div class="text-center text-white m-sm-5 px-sm-5">
@@ -219,8 +219,6 @@
 <Footer></Footer>
 
 @code {
-
-    private User _user;
     
     private List<Car> _cars;
     
@@ -230,14 +228,6 @@
     protected override async Task OnInitializedAsync()
     {
         _cars = await RentalContext.GetAllOwnCars();
-        
-        var authState = await AuthenticationStateTask;
-        var user = authState.User;
-
-        if (user.Identity.IsAuthenticated)
-        {
-            _user = await RentalContext.GetUserByUsername(user.Identity.Name);
-        }
     }
 
 }
