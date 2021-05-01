@@ -3,8 +3,7 @@
 @using Rental.Data.Context
 @inject RentalContext RentalContext
 
-
-<Navigation></Navigation>
+<Navigation User="@_user"></Navigation>
 
 <section class="row">
     <div class="px-5 pb-5 col-md-6 col-xxl-3 d-none d-md-block">
@@ -127,11 +126,24 @@
 
 @code {
 
+    private User _user;
+    
     private List<Car> _cars;
+    
+    [CascadingParameter]
+    private Task<AuthenticationState> AuthenticationStateTask { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         _cars = await RentalContext.GetAllCars();
+        
+        var authState = await AuthenticationStateTask;
+        var user = authState.User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            _user = await RentalContext.GetUserByUsername(user.Identity.Name);
+        }
     }
 
 }
