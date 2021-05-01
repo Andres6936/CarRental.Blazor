@@ -4,45 +4,53 @@
 
 <Navigation></Navigation>
 
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">User</th>
-        <th scope="col">Date Start</th>
-        <th scope="col">Date End</th>
-        <th scope="col">Status</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var loan in _loans)
-    {
-        <tr>
-            <th scope="row">@loan.Serial</th>
-            <td>@loan.User</td>
-            <td>@loan.DateStart.ToString("yyyy-MM-dd")</td>
-            <td>@loan.DateEnd.ToString("yyyy-MM-dd")</td>
+<AuthorizeView Roles="Administrator">
+    <Authorized>
+        
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">User</th>
+                <th scope="col">Date Start</th>
+                <th scope="col">Date End</th>
+                <th scope="col">Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var loan in _loans)
+            {
+                <tr>
+                    <th scope="row">@loan.Serial</th>
+                    <td>@loan.User</td>
+                    <td>@loan.DateStart.ToString("yyyy-MM-dd")</td>
+                    <td>@loan.DateEnd.ToString("yyyy-MM-dd")</td>
             
-            @if (IsCanceled(@loan.HasBeenCanceled))
-            {
-                <td><span class="badge bg-danger">Canceled</span></td>
+                    @if (IsCanceled(@loan.HasBeenCanceled))
+                    {
+                        <td><span class="badge bg-danger">Canceled</span></td>
+                    }
+                    else if (IsFuture(@loan.DateStart))
+                    {
+                        <td><span class="badge bg-primary">Future</span></td>
+                    }
+                    else if (IsActive(@loan.DateEnd))
+                    {
+                        <td><span class="badge bg-success">Active</span></td>
+                    }
+                    else
+                    {
+                        <td><span class="badge bg-secondary">Inactive</span></td>
+                    }
+                </tr>
             }
-            else if (IsFuture(@loan.DateStart))
-            {
-                <td><span class="badge bg-primary">Future</span></td>
-            }
-            else if (IsActive(@loan.DateEnd))
-            {
-                <td><span class="badge bg-success">Active</span></td>
-            }
-            else
-            {
-                <td><span class="badge bg-secondary">Inactive</span></td>
-            }
-        </tr>
-    }
-    </tbody>
-</table>
+            </tbody>
+        </table>
+    </Authorized>
+    <NotAuthorized>
+        <MessageNotAuthorized/>
+    </NotAuthorized>
+</AuthorizeView>
 
 <Footer></Footer>
 
