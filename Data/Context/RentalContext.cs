@@ -30,6 +30,7 @@ namespace Rental.Data.Context
                 Username = row["CLI_USER"].ToString(),
                 Email = row["CLI_EMAIL"].ToString(),
                 Icon = row["CLI_ICON"].ToString(),
+                Role = row["CLI_ROLE"].ToString(),
                 FirstName = row["CLI_FIRST_NAME"].ToString(),
                 LastName = row["CLI_LAST_NAME"].ToString(),
                 CreditCardNumber = row["CLI_CREDIT_CARD_NUMBER"].ToString(),
