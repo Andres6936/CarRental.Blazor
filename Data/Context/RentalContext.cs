@@ -23,6 +23,22 @@ namespace Rental.Data.Context
             return _connection;
         }
 
+        private User GetUserFromRow(DataRow row)
+        {
+            return new()
+            {
+                Username = row[""].ToString(),
+                Email = row[""].ToString(),
+                Icon = row[""].ToString(),
+                FirstName = row[""].ToString(),
+                LastName = row[""].ToString(),
+                CreditCardNumber = row[""].ToString(),
+                CreditCardCvv = row[""].ToString(),
+                Country = row[""].ToString(),
+                Phone = row[""].ToString(),
+            };
+        }
+
         private Car GetCarFromRow(DataRow row)
         {
             return new()
@@ -109,6 +125,25 @@ namespace Rental.Data.Context
             adapter.Fill(table);
 
             return await Task.FromResult(GetInformationLoanFromQuery(table));
+        }
+
+        public async Task<User> GetUserByUsername(string username)
+        {
+            var cmd = new MySqlCommand("Select * from User where CLI_USER = @Username",
+                GetConnection());
+            
+            // Fill the parameters
+            cmd.Parameters.AddWithValue("@Username", username);
+            
+            var adapter = new MySqlDataAdapter(cmd);
+            var table = new DataTable();
+            
+            adapter.Fill(table);
+
+            // Get the first and unique result
+            DataRow row = table.Rows[0];
+
+            return await Task.FromResult(GetUserFromRow(row));
         }
         
         public async Task<Car> GetCarByLicense(string license)
