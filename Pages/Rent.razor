@@ -19,8 +19,8 @@
                     <div class="card mt-4 col-md-6 offset-md-3">
                         <div class="card-body">
                             <h6 class="fw-bold">Summary</h6>
-                            <p class="mb-1 small">Sun, Apr 11 - 12:00 PM</p>
-                            <p class="mb-1 small">Sun, Apr 18 - 12:00 PM</p>
+                            <p class="mb-1 small">@DateTime.Now.ToString("dddd, MMMM dd - HH:mm tt")</p>
+                            <p class="mb-1 small">@DateTime.Now.AddDays(7).ToString("dddd, MMMM dd - HH:mm tt")</p>
 
                             <h6 class="fw-bold border-top mt-3 pt-3">Charges</h6>
                             <p class="mb-1 small">Economy <span class="float-end">$@_car.Price</span></p>
