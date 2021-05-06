@@ -137,6 +137,25 @@ namespace Rental.Data.Context
             return await Task.FromResult(GetInformationLoanFromQuery(table));
         }
 
+        public async Task<CreditCard> GetCreditCardByUsername(string username)
+        {
+            var cmd = new MySqlCommand("Select * from CreditCard where CLI_USER = @Username",
+                GetConnection());
+            
+            // Fill the parameters
+            cmd.Parameters.AddWithValue("@Username", username);
+            
+            var adapter = new MySqlDataAdapter(cmd);
+            var table = new DataTable();
+            
+            adapter.Fill(table);
+
+            // Get the first and unique result
+            DataRow row = table.Rows[0];
+
+            return await Task.FromResult(GetCreditCardFromRow(row));
+        }
+
         public async Task<User> GetUserByUsername(string username)
         {
             var cmd = new MySqlCommand("Select * from User where CLI_USER = @Username",
