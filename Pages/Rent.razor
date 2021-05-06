@@ -114,7 +114,7 @@
     private Task<AuthenticationState> AuthenticationStateTask { get; set; }
 
     private Car _car;
-    private CreditCard _creditCard;
+    private List<CreditCard> _creditCard;
 
     protected override async Task OnInitializedAsync()
     {
@@ -124,7 +124,7 @@
         if (user.Identity.IsAuthenticated)
         {
             _car = await RentalContext.GetCarByLicense(License);
-            _creditCard = await RentalContext.GetCreditCardByUsername(user.Identity.Name);
+            _creditCard = await RentalContext.GetCreditCardsByUsername(user.Identity.Name);
         }
     }
     

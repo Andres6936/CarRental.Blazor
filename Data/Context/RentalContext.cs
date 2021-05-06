@@ -93,6 +93,18 @@ namespace Rental.Data.Context
             return loans;
         }
 
+        private List<CreditCard> GetCreditCardsFromQuery(DataTable table)
+        {
+            var creditCards = new List<CreditCard>();
+
+            foreach (DataRow row in table.Rows)
+            {
+                creditCards.Add(GetCreditCardFromRow(row));
+            }
+
+            return creditCards;
+        }
+        
         private List<Car> GetInformationCarsFromQuery(DataTable table)
         {
             var cars = new List<Car>();
@@ -137,7 +149,7 @@ namespace Rental.Data.Context
             return await Task.FromResult(GetInformationLoanFromQuery(table));
         }
 
-        public async Task<CreditCard> GetCreditCardByUsername(string username)
+        public async Task<List<CreditCard>> GetCreditCardsByUsername(string username)
         {
             var cmd = new MySqlCommand("Select * from CreditCard where CLI_USER = @Username",
                 GetConnection());
@@ -150,10 +162,7 @@ namespace Rental.Data.Context
             
             adapter.Fill(table);
 
-            // Get the first and unique result
-            DataRow row = table.Rows[0];
-
-            return await Task.FromResult(GetCreditCardFromRow(row));
+            return await Task.FromResult(GetCreditCardsFromQuery(table));
         }
 
         public async Task<User> GetUserByUsername(string username)
