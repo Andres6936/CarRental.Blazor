@@ -5,93 +5,103 @@
 
 <Navigation/>
 
-<section class="row row-cols-1">
-    <div class="col px-4">
-        <section class="col-12 p-0 mx-0 my-3 col-xxl-6 mx-xxl-0 px-xxl-5">
-            <img src="@_car.Image" class="img-fluid px-md-5 px-xxl-0" alt="Vehicle">
-            <p class="text-muted small mt-3 text-end px-md-5 px-xxl-0">Photo by @_car.Copyright from Pexels</p>
-        </section>
+<AuthorizeView>
+    <Authorized>
+        
+        <section class="row row-cols-1">
+            <div class="col px-4">
+                <section class="col-12 p-0 mx-0 my-3 col-xxl-6 mx-xxl-0 px-xxl-5">
+                    <img src="@_car.Image" class="img-fluid px-md-5 px-xxl-0" alt="Vehicle">
+                    <p class="text-muted small mt-3 text-end px-md-5 px-xxl-0">Photo by @_car.Copyright from Pexels</p>
+                </section>
 
-        <section class="col-12 p-0 mx-0 my-3 col-xxl-6 mx-xxl-0 px-xxl-5">
-            <div class="card mt-4 col-md-6 offset-md-3">
-                <div class="card-body">
-                    <h6 class="fw-bold">Summary</h6>
-                    <p class="mb-1 small">Sun, Apr 11 - 12:00 PM</p>
-                    <p class="mb-1 small">Sun, Apr 18 - 12:00 PM</p>
+                <section class="col-12 p-0 mx-0 my-3 col-xxl-6 mx-xxl-0 px-xxl-5">
+                    <div class="card mt-4 col-md-6 offset-md-3">
+                        <div class="card-body">
+                            <h6 class="fw-bold">Summary</h6>
+                            <p class="mb-1 small">Sun, Apr 11 - 12:00 PM</p>
+                            <p class="mb-1 small">Sun, Apr 18 - 12:00 PM</p>
 
-                    <h6 class="fw-bold border-top mt-3 pt-3">Charges</h6>
-                    <p class="mb-1 small">Economy <span class="float-end">$@_car.Price</span></p>
-                    <p class="mb-1 small">Taxes and fees <span class="float-end">--</span></p>
+                            <h6 class="fw-bold border-top mt-3 pt-3">Charges</h6>
+                            <p class="mb-1 small">Economy <span class="float-end">$@_car.Price</span></p>
+                            <p class="mb-1 small">Taxes and fees <span class="float-end">--</span></p>
 
-                    <h6 class="fw-bold border-top mt-3 pt-3 mb-0">Total <span class="float-end">$@_car.Price</span></h6>
-                </div>
+                            <h6 class="fw-bold border-top mt-3 pt-3 mb-0">Total <span class="float-end">$@_car.Price</span></h6>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col px-4">
+                <section class="col-12 p-0 mx-0 my-3 col-xxl-6 mx-xxl-0 px-xxl-5">
+                    <div class="card mt-4 col-md-6 offset-md-3">
+                        <div class="card-body">
+                            <form class="small">
+                                <span class="fw-bold">Saved cards:</span>
+                                <div class="row row-cols-1 mt-3">
+                                    <div class="col-2"><img class="img-fluid"
+                                                            src="https://img.icons8.com/color/48/000000/mastercard-logo.png"/>
+                                    </div>
+                                    <div class="col-7"><input class="form-control" type="text"
+                                                              placeholder="**** **** **** 3193"></div>
+                                    <div class="col-3 d-flex justify-content-center">
+                                        <a href="#" class="text-decoration-none text-muted fw-bold">Remove</a>
+                                    </div>
+                                </div>
+
+                                <div class="row row-cols-1 mb-3 mt-2">
+                                    <div class="col-2"><img class="img-fluid"
+                                                            src="https://img.icons8.com/color/48/000000/visa.png"/></div>
+                                    <div class="col-7"><input class="form-control" type="text"
+                                                              placeholder="**** **** **** 4296"></div>
+                                    <div class="col-3 d-flex justify-content-center">
+                                        <a href="#" class="text-decoration-none text-muted fw-bold">Remove</a>
+                                    </div>
+                                </div>
+
+                                <span class="fw-bold">Add new card:</span>
+                                <div class="form-floating my-3">
+                                    <input id="rental-card-holder-name" class="form-control" type="text"
+                                           placeholder="Bojan Viner">
+                                    <label for="rental-card-holder-name">Card holder name</label>
+                                </div>
+
+                                <div class="row row-cols-3">
+                                    <div class="col-5">
+                                        <div class="form-floating">
+                                            <input id="rental-card-number" class="form-control" type="text"
+                                                   placeholder="5134-5264-4">
+                                            <label for="rental-card-number">Card number</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-floating">
+                                            <input id="rental-card-exp-date" class="form-control" type="text"
+                                                   placeholder="Exp. date">
+                                            <label for="rental-card-exp-date">Exp. date</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-floating">
+                                            <input id="rental-card-cvv" class="form-control" type="text" placeholder="CVV">
+                                            <label for="rental-card-cvv">CVV</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-success col-12 mt-3"><b>Add card</b></button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
             </div>
         </section>
-    </div>
+        
+    </Authorized>
+    <NotAuthorized>
+        <MessageNotAuthorized/>
+    </NotAuthorized>
+</AuthorizeView>
 
-    <div class="col px-4">
-        <section class="col-12 p-0 mx-0 my-3 col-xxl-6 mx-xxl-0 px-xxl-5">
-            <div class="card mt-4 col-md-6 offset-md-3">
-                <div class="card-body">
-                    <form class="small">
-                        <span class="fw-bold">Saved cards:</span>
-                        <div class="row row-cols-1 mt-3">
-                            <div class="col-2"><img class="img-fluid"
-                                                    src="https://img.icons8.com/color/48/000000/mastercard-logo.png"/>
-                            </div>
-                            <div class="col-7"><input class="form-control" type="text"
-                                                      placeholder="**** **** **** 3193"></div>
-                            <div class="col-3 d-flex justify-content-center">
-                                <a href="#" class="text-decoration-none text-muted fw-bold">Remove</a>
-                            </div>
-                        </div>
-
-                        <div class="row row-cols-1 mb-3 mt-2">
-                            <div class="col-2"><img class="img-fluid"
-                                                    src="https://img.icons8.com/color/48/000000/visa.png"/></div>
-                            <div class="col-7"><input class="form-control" type="text"
-                                                      placeholder="**** **** **** 4296"></div>
-                            <div class="col-3 d-flex justify-content-center">
-                                <a href="#" class="text-decoration-none text-muted fw-bold">Remove</a>
-                            </div>
-                        </div>
-
-                        <span class="fw-bold">Add new card:</span>
-                        <div class="form-floating my-3">
-                            <input id="rental-card-holder-name" class="form-control" type="text"
-                                   placeholder="Bojan Viner">
-                            <label for="rental-card-holder-name">Card holder name</label>
-                        </div>
-
-                        <div class="row row-cols-3">
-                            <div class="col-5">
-                                <div class="form-floating">
-                                    <input id="rental-card-number" class="form-control" type="text"
-                                           placeholder="5134-5264-4">
-                                    <label for="rental-card-number">Card number</label>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-floating">
-                                    <input id="rental-card-exp-date" class="form-control" type="text"
-                                           placeholder="Exp. date">
-                                    <label for="rental-card-exp-date">Exp. date</label>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-floating">
-                                    <input id="rental-card-cvv" class="form-control" type="text" placeholder="CVV">
-                                    <label for="rental-card-cvv">CVV</label>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="btn btn-success col-12 mt-3"><b>Add card</b></button>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </div>
-</section>
 
 <Footer></Footer>
 
