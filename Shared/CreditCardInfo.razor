@@ -1,0 +1,36 @@
+@using Rental.Data
+
+<div class="row row-cols-1 mt-3">
+    <div class="col-2">
+        @if (CreditCard.Type.Equals("Mastercard"))
+        {
+            <img class="img-fluid"
+                 src="https://img.icons8.com/color/48/000000/mastercard-logo.png"/>            
+        }
+        else if (CreditCard.Type.Equals("Visa"))
+        {
+            <img class="img-fluid"
+                 src="https://img.icons8.com/color/48/000000/visa.png"/>
+        }
+    </div>
+    <div class="col-7">
+        <input class="form-control" type="text"
+               placeholder="@GetCreditCardNumberWithFormat()">
+    </div>
+    <div class="col-3 d-flex justify-content-center">
+        <a href="#" class="text-decoration-none text-muted fw-bold">Remove</a>
+    </div>
+</div>
+
+@code 
+{
+    [Parameter]
+    public CreditCard CreditCard { get; set; }
+
+    private string GetCreditCardNumberWithFormat()
+    {
+        string number = CreditCard.Number;
+
+        return number.Substring(number.Length - 4).PadLeft(number.Length, '*');
+    }
+}
