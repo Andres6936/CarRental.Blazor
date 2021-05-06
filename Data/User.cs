@@ -14,10 +14,6 @@ namespace Rental.Data
 
         public string LastName { get; set; }
 
-        public string CreditCardNumber { get; set; }
-
-        public string CreditCardCvv { get; set; }
-
         public string Country { get; set; }
 
         public string Phone { get; set; }

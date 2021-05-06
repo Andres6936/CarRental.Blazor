@@ -23,6 +23,17 @@ namespace Rental.Data.Context
             return _connection;
         }
 
+        private CreditCard GetCreditCardFromRow(DataRow row)
+        {
+            return new()
+            {
+                Username = row["CLI_USER"].ToString(),
+                Number = row["CC_CREDIT_CARD_NUMBER"].ToString(),
+                Type = row["CC_CREDIT_CARD_CVV"].ToString(),
+                Cvv = int.Parse(row["CC_CREDIT_CARD_TYPE"].ToString()),
+            };
+        }
+        
         private User GetUserFromRow(DataRow row)
         {
             return new()
@@ -33,8 +44,6 @@ namespace Rental.Data.Context
                 Role = row["CLI_ROLE"].ToString(),
                 FirstName = row["CLI_FIRST_NAME"].ToString(),
                 LastName = row["CLI_LAST_NAME"].ToString(),
-                CreditCardNumber = row["CLI_CREDIT_CARD_NUMBER"].ToString(),
-                CreditCardCvv = row["CLI_CREDIT_CARD_CVV"].ToString(),
                 Country = row["CLI_COUNTRY"].ToString(),
                 Phone = row["CLI_PHONE"].ToString(),
             };
