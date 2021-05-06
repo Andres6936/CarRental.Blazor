@@ -109,12 +109,23 @@
     
     [Parameter]
     public string License { get; set; }
+    
+    [CascadingParameter]
+    private Task<AuthenticationState> AuthenticationStateTask { get; set; }
 
     private Car _car;
+    private CreditCard _creditCard;
 
     protected override async Task OnInitializedAsync()
     {
-        _car = await RentalContext.GetCarByLicense(License);
+        var authState = await AuthenticationStateTask;
+        var user = authState.User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            _car = await RentalContext.GetCarByLicense(License);
+            _creditCard = await RentalContext.GetCreditCardByUsername(user.Identity.Name);
+        }
     }
     
 }
