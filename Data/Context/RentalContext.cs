@@ -29,8 +29,8 @@ namespace Rental.Data.Context
             {
                 Username = row["CLI_USER"].ToString(),
                 Number = row["CC_CREDIT_CARD_NUMBER"].ToString(),
-                Type = row["CC_CREDIT_CARD_CVV"].ToString(),
-                Cvv = int.Parse(row["CC_CREDIT_CARD_TYPE"].ToString()),
+                Type = row["CC_CREDIT_CARD_TYPE"].ToString(),
+                Cvv = int.Parse(row["CC_CREDIT_CARD_CVV"].ToString()),
             };
         }
         
