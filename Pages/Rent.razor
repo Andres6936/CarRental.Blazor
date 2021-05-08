@@ -124,7 +124,22 @@
 
     private void ValidateLoan()
     {
-        Console.WriteLine("Start: " + _dateStart);
-        Console.WriteLine("End: " + _dateEnd);
+        if (_dateStart > _dateEnd)
+        {
+            Console.WriteLine("The start date cannot be greater than end date.");
+            return;
+        }
+        
+        Rental.Data.Loan loan = new()
+        {
+            CarLicense = License,
+            HasBeenCanceled = "NO",
+            DateEnd = _dateEnd,
+            DateStart = _dateStart,
+            CreditCardNumber = _creditCards[0].Number,
+        };
+
+        Console.WriteLine("Transaction successful: " + loan);
+        
     }
 }
