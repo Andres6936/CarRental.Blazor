@@ -73,11 +73,11 @@ namespace Rental.Data.Context
             return new()
             {
                 Serial = int.Parse(row["LOAN_SERIAL"].ToString()),
-                User = row["LOAN_USER"].ToString(),
                 DateStart = (DateTime) row["LOAN_DATE_START"],
                 DateEnd = (DateTime) row["LOAN_DATE_END"],
                 CarLicense = row["LOAN_CAR_LICENSE"].ToString(),
-                HasBeenCanceled = row["LOAN_HB_CANCELED"].ToString()
+                HasBeenCanceled = row["LOAN_HB_CANCELED"].ToString(),
+                CreditCardNumber = row["CC_CREDIT_CARD_NUMBER"].ToString(),
             };
         }
 
@@ -163,6 +163,47 @@ namespace Rental.Data.Context
             adapter.Fill(table);
 
             return await Task.FromResult(GetCreditCardsFromQuery(table));
+        }
+
+        public async Task<User> GetUserByCreditCardNumber(string creditCardNumber)
+        {
+            var cmd = new MySqlCommand("Select U.* from CreditCard CC join User U on U.CLI_USER = CC.CLI_USER where CC_CREDIT_CARD_NUMBER = @CreditCardNumber;",
+                GetConnection());
+            
+            // Fill the parameters
+            cmd.Parameters.AddWithValue("@CreditCardNumber", creditCardNumber);
+            
+            var adapter = new MySqlDataAdapter(cmd);
+            var table = new DataTable();
+            
+            adapter.Fill(table);
+
+            try
+            {
+                // Get the first and unique result
+                DataRow row = table.Rows[0];
+                
+                return await Task.FromResult(GetUserFromRow(row));
+            }
+            catch ( IndexOutOfRangeException e)
+            {
+                Console.WriteLine("Credit card for: " + creditCardNumber);
+                Console.WriteLine(e.Message);
+            }
+
+            User userDummy = new()
+            {
+                Username = "Dummy",
+                Email = "Dummy",
+                Icon = "Dummy",
+                Role = "Dummy",
+                FirstName = "Dummy",
+                LastName = "Dummy",
+                Country = "Dummy",
+                Phone = "Dummy",
+            };
+
+            return await Task.FromResult(userDummy);
         }
 
         public async Task<User> GetUserByUsername(string username)

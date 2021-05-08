@@ -1,5 +1,6 @@
 @page "/Loan/{License}"
 @using Rental.Data.Context
+@using Rental.Data
 @inject RentalContext RentalContext
 
 <Navigation></Navigation>
@@ -22,7 +23,7 @@
             {
                 <tr>
                     <th scope="row">@loan.Serial</th>
-                    <td>@loan.User</td>
+                    <td>@GetUsernameFromLoan(loan)</td>
                     <td>@loan.DateStart.ToString("yyyy-MM-dd")</td>
                     <td>@loan.DateEnd.ToString("yyyy-MM-dd")</td>
             
@@ -74,6 +75,11 @@
             // Interchange the dates for set the right format.
             RentalContext.UpdateLoanDates(serial, end.ToString("yyyy-MM-dd"), start.ToString("yyyy-MM-dd"));
         }
+    }
+
+    private string GetUsernameFromLoan(Rental.Data.Loan loan)
+    {
+        return RentalContext.GetUserByCreditCardNumber(loan.CreditCardNumber).Result.Username;
     }
 
     private bool IsCanceled(string isCanceled)
