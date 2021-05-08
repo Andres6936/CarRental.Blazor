@@ -297,6 +297,27 @@ namespace Rental.Data.Context
             return result;
         }
 
+        public int InsertLoan(Loan loan)
+        {
+            var connection = GetConnection(); 
+            var cmd = new MySqlCommand("Insert into Loan (LOAN_DATE_START, LOAN_DATE_END, LOAN_CAR_LICENSE, LOAN_HB_CANCELED, LOAN_TOTAL_DAYS_USED, CC_CREDIT_CARD_NUMBER) values (@DateStart, @DateEnd, @License, 'FALSE', 1, @CreditCardNumber)",
+                connection);
+            
+            // Fill the parameters
+            cmd.Parameters.AddWithValue("@DateStart", loan.DateStart);
+            cmd.Parameters.AddWithValue("@DateEnd", loan.DateEnd);
+            cmd.Parameters.AddWithValue("@License", loan.CarLicense);
+            cmd.Parameters.AddWithValue("@CreditCardNumber", loan.CreditCardNumber);
+
+            connection.Open();
+            
+            int result = cmd.ExecuteNonQuery();
+            
+            connection.Close();
+            
+            return result;
+        }
+
         public bool VerifyUserCredentials(string username, string password)
         {
             var connection = GetConnection(); 

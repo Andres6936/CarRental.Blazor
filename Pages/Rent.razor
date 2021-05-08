@@ -139,7 +139,13 @@
             CreditCardNumber = _creditCards[0].Number,
         };
 
-        Console.WriteLine("Transaction successful: " + loan);
-        
+        if (RentalContext.InsertLoan(loan) > 0)
+        {
+            Console.WriteLine("Transaction successful");            
+        }
+        else
+        {
+            Console.WriteLine("Transaction wrong");
+        }
     }
 }
