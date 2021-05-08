@@ -178,32 +178,10 @@ namespace Rental.Data.Context
             
             adapter.Fill(table);
 
-            try
-            {
-                // Get the first and unique result
-                DataRow row = table.Rows[0];
+            // Get the first and unique result
+            DataRow row = table.Rows[0];
                 
-                return await Task.FromResult(GetUserFromRow(row));
-            }
-            catch ( IndexOutOfRangeException e)
-            {
-                Console.WriteLine("Credit card for: " + creditCardNumber);
-                Console.WriteLine(e.Message);
-            }
-
-            User userDummy = new()
-            {
-                Username = "Dummy",
-                Email = "Dummy",
-                Icon = "Dummy",
-                Role = "Dummy",
-                FirstName = "Dummy",
-                LastName = "Dummy",
-                Country = "Dummy",
-                Phone = "Dummy",
-            };
-
-            return await Task.FromResult(userDummy);
+            return await Task.FromResult(GetUserFromRow(row));
         }
 
         public async Task<User> GetUserByUsername(string username)
