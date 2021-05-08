@@ -135,7 +135,7 @@ namespace Rental.Data.Context
         
         public async Task<List<Loan>> GetLoansByUser(string user)
         {
-            var cmd = new MySqlCommand("Select * from Loan Where Loan.LOAN_USER = @User",
+            var cmd = new MySqlCommand("Select L.* from CreditCard CC join Loan L on CC.CC_CREDIT_CARD_NUMBER = L.CC_CREDIT_CARD_NUMBER where CLI_USER = @User",
                 GetConnection());
             
             // Fill the parameters
