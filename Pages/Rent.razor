@@ -20,11 +20,15 @@
                     <div class="card-body">
                         <h6 class="fw-bold mb-3">Summary</h6>
 
-                        <p class="mb-1 small">@_dateStart.ToString("dddd, MMMM dd - HH:mm tt")</p>
-                        <p class="mb-1 small">@_dateEnd.ToString("dddd, MMMM dd - HH:mm tt")</p>
+                        <label class="form-label col-12 text-end small">
+                            @_dateStart.ToString("dddd, MMMM dd - HH:mm tt")
+                            <input type="date" @bind="_dateStart" class="form-control my-2" min="2015-01-01" max="2022-12-31">
+                        </label>
 
-                        <input type="date" @bind="_dateStart">
-                        <input type="date" @bind="_dateEnd">
+                        <label class="form-label col-12 text-end small">
+                            @_dateEnd.ToString("dddd, MMMM dd - HH:mm tt")
+                            <input type="date" @bind="_dateEnd" class="form-control my-2" min="2015-01-01" max="2022-12-31">
+                        </label>
 
                         <h6 class="fw-bold border-top mt-3 pt-3">Charges</h6>
                         <p class="mb-1 small">Economy <span class="float-end">$@_car.Price</span></p>
