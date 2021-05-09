@@ -5,14 +5,21 @@
 
 <Navigation/>
 
-<section class="row row-cols-1 row-cols-sm-2 row-cols-xxl-4 g-3 p-4 p-sm-5">
-
-    @foreach (var user in _users)
-    {
-        <CardUserAction User="@user" />
-    }
-    
-</section>
+<AuthorizeView Roles="Administrator">
+    <Authorized>
+        <section class="row row-cols-1 row-cols-sm-2 row-cols-xxl-4 g-3 p-4 p-sm-5">
+        
+            @foreach (var user in _users)
+            {
+                <CardUserAction User="@user" />
+            }
+            
+        </section>
+    </Authorized>
+    <NotAuthorized>
+            <MessageNotAuthorized/>
+        </NotAuthorized>
+</AuthorizeView>
 
 <Footer></Footer>
 
