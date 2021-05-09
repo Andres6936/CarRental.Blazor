@@ -1,0 +1,31 @@
+@page "/List/Users"
+@using Rental.Data
+@using Rental.Data.Context
+@inject RentalContext RentalContext
+
+<Navigation/>
+
+<section class="row row-cols-1 row-cols-sm-2 row-cols-xxl-4 g-3 p-4 p-sm-5">
+
+    @foreach (var user in _users)
+    {
+        <CardUserAction User="@user" />
+    }
+    
+</section>
+
+<Footer></Footer>
+
+@code {
+    
+    private List<User> _users;
+    
+    [CascadingParameter]
+    private Task<AuthenticationState> AuthenticationStateTask { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        _users = await RentalContext.GetAllUsers();
+    }
+    
+}
