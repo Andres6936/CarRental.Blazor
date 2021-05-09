@@ -116,6 +116,18 @@ namespace Rental.Data.Context
 
             return cars;
         }
+        
+        private List<User> GetInformationUsersFromQuery(DataTable table)
+        {
+            var users = new List<User>();
+            
+            foreach (DataRow row in table.Rows)
+            {
+                users.Add(GetUserFromRow(row));
+            }
+
+            return users;
+        }
 
         public async Task<List<Loan>> GetLoansByLicense(string license)
         {
@@ -240,6 +252,16 @@ namespace Rental.Data.Context
             adapter.Fill(table);
 
             return await Task.FromResult(GetInformationCarsFromQuery(table));
+        }
+        
+        public async Task<List<User>> GetAllUsers()
+        {
+            var adapter = new MySqlDataAdapter("Select * from User", GetConnection());
+            var table = new DataTable();
+            
+            adapter.Fill(table);
+
+            return await Task.FromResult(GetInformationUsersFromQuery(table));
         }
 
         public async Task<List<Car>> GetAllOwnCars()
