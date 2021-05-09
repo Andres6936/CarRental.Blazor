@@ -7,84 +7,85 @@
 
 <AuthorizeView>
     <Authorized>
-        
-        <section class="row row-cols-1">
-            <div class="col px-4">
-                <section class="col-12 p-0 mx-0 my-3 col-xxl-6 mx-xxl-0 px-xxl-5">
-                    <img src="@_car.Image" class="img-fluid px-md-5 px-xxl-0" alt="Vehicle">
-                    <p class="text-muted small mt-3 text-end px-md-5 px-xxl-0">Photo by @_car.Copyright from Pexels</p>
-                </section>
 
-                <section class="col-12 p-0 mx-0 my-3 col-xxl-6 mx-xxl-0 px-xxl-5">
-                    <div class="card mt-4 col-md-6 offset-md-3">
-                        <div class="card-body">
-                            <h6 class="fw-bold">Summary</h6>
-                            <p class="mb-1 small">@_dateStart.ToString("dddd, MMMM dd - HH:mm tt")</p>
-                            <p class="mb-1 small">@_dateEnd.ToString("dddd, MMMM dd - HH:mm tt")</p>
-                            
-                            <input type="date" @bind="_dateStart">
-                            <input type="date" @bind="_dateEnd">
+        <section class="row row-cols-1 row-cols-xxl-3 m-2 mx-xxl-0">
 
-                            <h6 class="fw-bold border-top mt-3 pt-3">Charges</h6>
-                            <p class="mb-1 small">Economy <span class="float-end">$@_car.Price</span></p>
-                            <p class="mb-1 small">Taxes and fees <span class="float-end">--</span></p>
+            <section class="col p-0 my-3 px-xxl-5">
+                <img src="@_car.Image" class="img-fluid px-md-5 px-xxl-0 rounded-3" alt="Vehicle">
+                <p class="text-muted small mt-3 text-end px-md-5 px-xxl-0">Photo by @_car.Copyright from Pexels</p>
+            </section>
 
-                            <h6 class="fw-bold border-top mt-3 pt-3 mb-0">Total <span class="float-end">$@_car.Price</span></h6>
-                            <button class="btn btn-primary" @onclick="@ValidateLoan">Rent</button>
-                        </div>
+            <section class="col p-0 px-xxl-5">
+                <div class="card mt-4 col-md-6 offset-md-3 col-xxl-12 offset-xxl-0">
+                    <div class="card-body">
+                        <h6 class="fw-bold mb-3">Summary</h6>
+
+                        <p class="mb-1 small">@_dateStart.ToString("dddd, MMMM dd - HH:mm tt")</p>
+                        <p class="mb-1 small">@_dateEnd.ToString("dddd, MMMM dd - HH:mm tt")</p>
+
+                        <input type="date" @bind="_dateStart">
+                        <input type="date" @bind="_dateEnd">
+
+                        <h6 class="fw-bold border-top mt-3 pt-3">Charges</h6>
+                        <p class="mb-1 small">Economy <span class="float-end">$@_car.Price</span></p>
+                        <p class="mb-1 small">Taxes and fees <span class="float-end">--</span></p>
+
+                        <h6 class="fw-bold border-top mt-3 pt-3 mb-0">Total <span class="float-end">$@_car.Price</span></h6>
+
+                        <button type="button" class="btn btn-primary col-12 mt-3 fw-bold" @onclick="@ValidateLoan">Generate Loan</button>
                     </div>
-                </section>
-            </div>
+                </div>
+            </section>
 
-            <div class="col px-4">
-                <section class="col-12 p-0 mx-0 my-3 col-xxl-6 mx-xxl-0 px-xxl-5">
-                    <div class="card mt-4 col-md-6 offset-md-3">
-                        <div class="card-body">
-                            <form class="small">
-                                <span class="fw-bold">Saved cards:</span>
-                                
-                                @foreach (var creditCard in _creditCards)
-                                {
-                                    <CreditCardInfo CreditCard="@creditCard"/>
-                                }
+            <section class="col p-0 px-xxl-5">
+                <div class="card mt-4 col-md-6 offset-md-3 col-xxl-12 offset-xxl-0">
+                    <div class="card-body">
+                        <form class="small">
+                            <span class="fw-bold">Saved cards:</span>
 
-                                <span class="fw-bold">Add new card:</span>
-                                <div class="form-floating my-3">
-                                    <input id="rental-card-holder-name" class="form-control" type="text"
-                                           placeholder="Bojan Viner">
-                                    <label for="rental-card-holder-name">Card holder name</label>
-                                </div>
+                            @foreach (var creditCard in _creditCards)
+                            {
+                                <CreditCardInfo CreditCard="@creditCard"/>
+                            }
 
-                                <div class="row row-cols-3">
-                                    <div class="col-5">
-                                        <div class="form-floating">
-                                            <input id="rental-card-number" class="form-control" type="text"
-                                                   placeholder="5134-5264-4">
-                                            <label for="rental-card-number">Card number</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-floating">
-                                            <input id="rental-card-exp-date" class="form-control" type="text"
-                                                   placeholder="Exp. date">
-                                            <label for="rental-card-exp-date">Exp. date</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="form-floating">
-                                            <input id="rental-card-cvv" class="form-control" type="text" placeholder="CVV">
-                                            <label for="rental-card-cvv">CVV</label>
-                                        </div>
+                            <span class="fw-bold">Add new card:</span>
+                            <div class="form-floating my-3">
+                                <input id="rental-card-holder-name" class="form-control" type="text"
+                                       placeholder="Bojan Viner">
+                                <label for="rental-card-holder-name">Card holder name</label>
+                            </div>
+
+                            <div class="row row-cols-3">
+                                <div class="col-5">
+                                    <div class="form-floating">
+                                        <input id="rental-card-number" class="form-control" type="text"
+                                               placeholder="5134-5264-4">
+                                        <label for="rental-card-number">Card number</label>
                                     </div>
                                 </div>
-                                <button class="btn btn-success col-12 mt-3"><b>Add card</b></button>
-                            </form>
-                        </div>
+                                <div class="col-4">
+                                    <div class="form-floating">
+                                        <input id="rental-card-exp-date" class="form-control" type="text"
+                                               placeholder="Exp. date">
+                                        <label for="rental-card-exp-date">Exp. date</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-floating">
+                                        <input id="rental-card-cvv" class="form-control" type="text" placeholder="CVV">
+                                        <label for="rental-card-cvv">CVV</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-success col-12 mt-3">
+                                <b>Add card</b>
+                            </button>
+                        </form>
                     </div>
-                </section>
-            </div>
+                </div>
+            </section>
         </section>
-        
+
     </Authorized>
     <NotAuthorized>
         <MessageNotAuthorized/>
@@ -95,10 +96,10 @@
 <Footer></Footer>
 
 @code {
-    
+
     [Parameter]
     public string License { get; set; }
-    
+
     [CascadingParameter]
     private Task<AuthenticationState> AuthenticationStateTask { get; set; }
 
@@ -107,7 +108,7 @@
     private DateTime _dateStart = DateTime.Now;
 
     private DateTime _dateEnd = DateTime.Now.AddDays(7);
-    
+
     private List<CreditCard> _creditCards;
 
     protected override async Task OnInitializedAsync()
@@ -129,7 +130,7 @@
             Console.WriteLine("The start date cannot be greater than end date.");
             return;
         }
-        
+
         Rental.Data.Loan loan = new()
         {
             CarLicense = License,
@@ -141,11 +142,12 @@
 
         if (RentalContext.InsertLoan(loan) > 0)
         {
-            Console.WriteLine("Transaction successful");            
+            Console.WriteLine("Transaction successful");
         }
         else
         {
             Console.WriteLine("Transaction wrong");
         }
     }
+
 }
