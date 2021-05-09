@@ -26,12 +26,38 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/Service">Services</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contacts</a>
-                </li>
+                <AuthorizeView Roles="Administrator">
+                    <Authorized>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Upss!</a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li>
+                                    <a class="dropdown-item" href="html/auth/users.html">Users</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/User/Loans">Loans</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/Own">Own</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/Owe">Owe</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </Authorized>
+                    <NotAuthorized>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Contact">Contact</a>
+                        </li>
+                    </NotAuthorized>
+                </AuthorizeView>
             </ul>
         </div>
-        
+
         @if (_user == null)
         {
             <span class="d-none d-md-block navbar-text me-4">
@@ -40,7 +66,7 @@
             <span class="d-none d-md-block navbar-text me-3 border-primary border rounded-pill px-3 bg-primary fw-bold"
                   style="color: #FFF">
                 <a href="/SignIn" class="text-decoration-none">Sign In</a>
-            </span>            
+            </span>
         }
         else
         {
@@ -49,14 +75,24 @@
             </span>
             <span class="d-none d-sm-block d-md-block navbar-text me-4 dropstart">
                 <a id="rental-dropstart-user" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="@_user.Icon" height="30" />
+                    <img src="@_user.Icon" height="30"/>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="rental-dropstart-user">
-                    <li><a class="dropdown-item active" href="/Profile">Profile</a></li>
-                    <li><a class="dropdown-item" href="#">My Panel</a></li>
-                    <li><a class="dropdown-item" href="#">Configuration</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item bg-danger" href="/SignOutControl?returnUrl=/">Sign Out</a></li>
+                    <li>
+                        <a class="dropdown-item active" href="/Profile">Profile</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">My Panel</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">Configuration</a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <a class="dropdown-item bg-danger" href="/SignOutControl?returnUrl=/">Sign Out</a>
+                    </li>
                 </ul>
             </span>
         }
@@ -66,10 +102,10 @@
 @code
 {
     private User _user;
-    
+
     [CascadingParameter]
     private Task<AuthenticationState> AuthenticationStateTask { get; set; }
-    
+
     protected override async Task OnInitializedAsync()
     {
         var authState = await AuthenticationStateTask;
